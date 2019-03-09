@@ -1,4 +1,10 @@
 <?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use DB;
     /**
     * Copyright (c) 2005 Richard Heyes (http://www.phpguru.org/)
     *
@@ -18,7 +24,7 @@
     * How easy is that?
     */
 
-    class PorterStemmer
+    class PorterStemmer extends Model
     {
         /**
         * Regex for matching a consonant

@@ -2,21 +2,20 @@
 
 namespace App;
 
-include_once "remove_stop_words.php";
-include_once "PhrasePorterStemmer.php";
-
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use DB;
+use App\Stop_words;
+use App\PhrasePorterStemmer;
 
-class Index extends Model {
+class Indexing extends Model {
 	
 	public static $conn;
 	
 	public static $index_array = array();
 	
 	public function __construct(){
-		Index::$conn = mysqli_connect('localhost', 'root', '', 'search_engine');
+        Indexing::$conn = mysqli_connect('localhost', 'root', '', 'search_engine');
 		if( mysqli_connect_errno() ){
 			throw new exception('Could not connect to DB');
 		}
@@ -28,19 +27,22 @@ class Index extends Model {
 		
 		# for each file ( 1400 times for cranfield )
 		foreach($files_to_be_indexed as $name => $file){
-			# s1 to remove common words , s2 to stem other words in the whole file 
-			$s1 = remove_stop_words(strtolower($file));
+			# s1 to remove common words , s2 to stem other words in the whole file
+            $stop_words = new Stop_words();
+			$s1 = $stop_words->remove_stop_words(strtolower($file));
 //			echo $s1."</br>".str_word_count($s1);exit();
 			//$s2 = array();
-			$s2 = PhrasePorterStemmer::StemPhrase($s1);
+            $phrasePorterStemmer = new PhrasePorterStemmer();
+			$s2 = $phrasePorterStemmer->StemPhrase($s1);
             //var_dump($s2);exit();
-			# insertin the file title and count of words left in it , into db 
+			# insertin the file title and count of words left in it , into db
+
 			$sql = "INSERT INTO `documents` 
 				(`document_title`, `terms_count`) 
-				VALUES ('".mysqli_escape_string(Index::$conn, $name)."',".count($s2).")";
+				VALUES ('".mysqli_escape_string(self::$conn, $name)."',".count($s2).")";
 			//echo $sql;
-			$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
-			$docID = mysqli_insert_id(Index::$conn);
+			$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
+			$docID = mysqli_insert_id(self::$conn);
 			
 			# index the terms into the dictionary array , to be added later to db
 			//$docCount[$name] = count($s2);
@@ -77,15 +79,15 @@ class Index extends Model {
 		foreach($dictionary as $term => $dict){
 			$sql = "INSERT INTO `terms`
 				(`term`, `document_frequently`) 
-				VALUES ('".mysqli_escape_string(Index::$conn, $term)."',".$dict['df'].") 
+				VALUES ('".mysqli_escape_string(self::$conn, $term)."',".$dict['df'].") 
 				ON DUPLICATE KEY UPDATE 
-				`term`='".mysqli_escape_string(Index::$conn, $term)."', `document_frequently`=`document_frequently`+".$dict['df'].", 
+				`term`='".mysqli_escape_string(self::$conn, $term)."', `document_frequently`=`document_frequently`+".$dict['df'].", 
 				`term_id` = LAST_INSERT_ID(`term_id`)";
 			/*$sql = "INSERT INTO `terms`
 				(`term`, `document_frequently`) 
-				VALUES ('".mysqli_escape_string(Index::$conn, $term)."',".$dict['df'].")";*/
-			$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
-			$termID = mysqli_insert_id(Index::$conn);
+				VALUES ('".mysqli_escape_string(self::$conn, $term)."',".$dict['df'].")";*/
+			$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
+			$termID = mysqli_insert_id(self::$conn);
 			
 			# making the query of that term , for every document matches it
 			foreach($dict['postings'] as $docID => $posting){
@@ -97,7 +99,7 @@ class Index extends Model {
 		//echo "<br/>".$sql2;
 		
 		# inserting all records of term_document table in one query
-		$result = mysqli_query(Index::$conn, $sql2) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql2) or die(mysqli_error(self::$conn));
 	}
 	
 	public static function submit_query($query){
@@ -109,7 +111,7 @@ class Index extends Model {
 				AND (`term` = '".preg_replace('/\s+/', "' OR `term` = '", $query)."') ";
 
 		//echo $sql;
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 
 		$data = array();
 		if (mysqli_num_rows($result) == 0){
@@ -123,7 +125,7 @@ class Index extends Model {
 		print_r($data);
 		echo "</pre>";*/
 		$sql = "SELECT COUNT(*) as 'N' FROM `documents`";
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$total_documents = mysqli_fetch_assoc($result)['N'];
 		//echo $total_documents;
 		
@@ -150,7 +152,7 @@ class Index extends Model {
 
 		$sql = "SELECT * FROM `documents`
 				WHERE `document_id` = ".implode(" OR `document_id` = ", array_keys($relevence_docs));
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$data = array();
 		while( $row = mysqli_fetch_assoc($result) ){
 			$data[] = $row;
@@ -216,9 +218,10 @@ class Index extends Model {
 	  	$synonims = array ();
 	  	foreach ($words_array as $tag)
 		{
-		  	$tag_synonims = Index::one_word_get_synonims ($tag);
+		  	$tag_synonims = self::one_word_get_synonims ($tag);
 			# StemArray excutes the stem functions
-		  	$synonims[] = PhrasePorterStemmer::StemArray($tag_synonims);
+            $phrasePorterStemmer = new PhrasePorterStemmer();
+		  	$synonims[] = $phrasePorterStemmer->StemArray($tag_synonims);
 		}
 	  	return $synonims;
 	}
@@ -227,7 +230,7 @@ class Index extends Model {
 		$docs = array();
 		$relevence_docs = array();
 		# get sense 1 of every term in the query 
-		$meanings_array = Index::wordnet_tags_synonims($query);
+		$meanings_array = self::wordnet_tags_synonims($query);
 
 		$meanings_array[0] = array_unique($meanings_array[0]);
 		# computer : computer, computing machine, computing device, data processor, electronic computer, information processing system
@@ -245,7 +248,7 @@ class Index extends Model {
 		$relevence_docs = array();
 		
 		$sql = "SELECT COUNT(*) as 'N' FROM `documents`";
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$total_documents = mysqli_fetch_assoc($result)['N'];
 		
 		
@@ -264,7 +267,7 @@ class Index extends Model {
 							HAVING `c`= ".str_word_count($terms);
 					//echo "*******************************<br/>";
 					//echo $sql."<br/>";
-					$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+					$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 					$data = array();
 					# only document_id
 					while( $row = mysqli_fetch_assoc($result) ){
@@ -299,7 +302,7 @@ class Index extends Model {
 								`term` = '".$term."' AND
 								(`document_id` = " . implode(' OR `document_id` = ',$data ) . ")
 								ORDER BY `document_id`";
-							$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+							$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 							$data2 = array();
 							while( $row = mysqli_fetch_assoc($result) ){
 								$data2[] = $row;
@@ -364,7 +367,7 @@ class Index extends Model {
 					GROUP BY `document_id`) AS `t` 
 					ON `documents`.`document_id` = `t`.`document_id`";
 			//echo $sql."<br/>";
-			$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+			$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 			$data2 = array();
 			$df = mysqli_num_rows($result);
 			while( $row = mysqli_fetch_assoc($result) ){
@@ -390,7 +393,7 @@ class Index extends Model {
 		
 		$sql = "SELECT * FROM `documents`
 				WHERE `document_id` = ".implode(" OR `document_id` = ", array_keys($relevence_docs));
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$data = array();
 		while( $row = mysqli_fetch_assoc($result) ){
 			$data[] = $row;
@@ -432,7 +435,7 @@ class Index extends Model {
 	
 	public static function getDocuments(){
 		$sql = "SELECT `document_id`,`document_title` FROM `documents`";
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$data = array();
 		while( $row = mysqli_fetch_assoc($result) ){
 			$data[] = $row;
@@ -450,12 +453,12 @@ class Index extends Model {
 		# 1. deleting document from db .
 		$sql = "DELETE FROM `documents` 
 				WHERE `document_id` = ".$id;
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		
 		# 2. get terms in it .
 		$sql = "SELECT `term_id` FROM `term_document` 
 				WHERE `document_id` = ".$id;
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		if (mysqli_num_rows($result) == 0){
 			echo "There is no document with id : ".$id;
 			exit;
@@ -468,34 +471,33 @@ class Index extends Model {
 		# 3. delete tf for all terms in that doc .
 		$sql = "DELETE FROM `term_document`
 				WHERE `document_id` = ".$id;
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		
 		# 4. decreasdin df by (1) for all terms in that doc .
 		$sql = "UPDATE `terms` 
 				SET `document_frequently` = `document_frequently` - 1 
 				WHERE `term_id` = ".implode(" OR `term_id` = ", $data);
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		
 		# 5. not important but gives more efficent on query index .
 		$sql = "DELETE FROM `terms`
 				WHERE `document_frequently` = 0";
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		
 	}
 	
 	public static function resetIndex(){
 		// delete all data from all table 
 		$sql = "TRUNCATE TABLE `documents`";
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$sql = "TRUNCATE TABLE `terms`";
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$sql = "TRUNCATE TABLE `term_document`";
-		$result = mysqli_query(Index::$conn, $sql) or die(mysqli_error(Index::$conn));
+		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		// delete all files from documents directory
 		array_map('unlink', glob(dirname(__FILE__)."/documents/*.txt"));
 	}
 }
 
-$index = new Index();
 
 ?>

@@ -1,13 +1,24 @@
-<?php 	
-	include_once "PorterStemmer.php";
-	class PhrasePorterStemmer
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use DB;
+use App\Stop_words;
+use App\PorterStemmer;
+
+include_once "PorterStemmer.php";
+
+	class PhrasePorterStemmer extends Model
 	{
 		public static function StemPhrase($phrase)
         {
 			$array = explode(' ', $phrase);
             foreach ($array as &$word)
 			{
-				$word = PorterStemmer::Stem($word);
+                $porterStemmer = new PorterStemmer();
+				$word = $porterStemmer->Stem($word);
 			}
 			return $array;
         }
