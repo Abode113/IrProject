@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use DB;
 use App\Indexing;
+use App\deleteDocument;
 
 class FileManagerController extends Controller
 {
@@ -41,6 +42,14 @@ class FileManagerController extends Controller
         }
         return redirect('/');
 
+    }
+
+    public function deleteDocument(Request $request, $id){
+
+        $deleteDocument = new deleteDocument();
+        $deleteDocument->DeleteDocument($id);
+
+        return redirect('/Document/browse/');
     }
 }
 

@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 
 Route::post('/FileManager/uploade', 'FileManagerController@uploade')->name('uploadeFile');
+Route::post('/FileManager/deleteDocument/{id}', 'FileManagerController@deleteDocument')->name('deleteDocument');
+Route::get('/Document/browse', 'viewDocumentController@browse')->name('browseDocument');
