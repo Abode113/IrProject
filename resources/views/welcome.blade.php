@@ -4,11 +4,14 @@
 @section('body')
     <section class="jumbotron text-center">
         <div class="container">
+
+
             <h1 class="jumbotron-heading">IR System</h1>
             <p class="lead text-muted">write the query here :</p>
-            <form method="get" action="result.php">
+            <form method="post" action="{{route('search')}}">
+                {{ csrf_field() }}
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q" id="q" placeholder="Search ...">
+                    <input type="text" class="form-control" name="Query" id="q" placeholder="Search ...">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" type="submit">Go!</button>
                     </span>
@@ -19,16 +22,22 @@
                     </div>
                 </div>
             </form>
+
+
             <small class="text-muted">based on xpath index</small>
             <p class="lead text-muted">write the query here :</p>
-            <form method="get" action="result_xpath.php">
+            <form method="post" action="{{route('xpathsearch')}}">
+                {{ csrf_field() }}
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q_x" id="q_x" placeholder="Search ...">
+                    <input type="text" class="form-control" name="q_Query" id="q_x" placeholder="Search ...">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" type="submit">Go!</button>
                     </span>
                 </div>
             </form>
+
+
+
         </div>
     </section>
     <section class="jumbotron text-center">
@@ -46,9 +55,9 @@
         <br/>
         <a class="btn btn-success" href="/Document/browse/">View Documents
         </a>
-        <a class="btn btn-danger" href="reset_index.php">Reset Documents
+        <a class="btn btn-danger" href="/FileManager/resetIndex/">Reset Documents
         </a>
-        <a class="btn btn-primary" href="similarity.php">Find Similarity
+        <a class="btn btn-primary" href="/similarity/browse/">Find Similarity
         </a>
     </section>
 @endsection

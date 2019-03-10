@@ -18,6 +18,11 @@ Route::get('/', function () {
 
 
 
+
+Route::post('/searchEngine/xpathsearch', 'xpathSearchController@search')->name('xpathsearch');
+Route::post('/searchEngine/search', 'searchController@search')->name('search');
 Route::post('/FileManager/uploade', 'FileManagerController@uploade')->name('uploadeFile');
 Route::post('/FileManager/deleteDocument/{id}', 'FileManagerController@deleteDocument')->name('deleteDocument');
+Route::get('/FileManager/resetIndex/', 'FileManagerController@resetIndex')->name('resetIndex');
 Route::get('/Document/browse', 'viewDocumentController@browse')->name('browseDocument');
+Route::get('/similarity/browse', 'similarityController@browse')->name('browsesimilarity');

@@ -7,6 +7,7 @@ use Session;
 use DB;
 use App\Indexing;
 use App\deleteDocument;
+use App\resetIndex;
 
 class FileManagerController extends Controller
 {
@@ -50,6 +51,14 @@ class FileManagerController extends Controller
         $deleteDocument->DeleteDocument($id);
 
         return redirect('/Document/browse/');
+    }
+
+    public function resetIndex(){
+
+        $resetIndex = new resetIndex();
+        $resetIndex->resetIndex();
+
+        return redirect('/');
     }
 }
 

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use DB;
 use App\Stop_words;
 use App\PhrasePorterStemmer;
+use App\highlight;
 
 class Indexing extends Model {
 	
@@ -167,11 +168,13 @@ class Indexing extends Model {
 		$i=1;
 		echo '<div class="card">
   				<ul class="list-group list-group-flush">';
+        $highlight = new highlight();
 		foreach($relevence_docs as $docID => $s){
 			if($i <= 20){
+                $highlightedText = $highlight->highlight($query, dirname(__FILE__). "\documents\\".$links[$docID]);
 				echo "
 				<li class='list-group-item'>
-					relevant doc number $i : <a href='highlight.php?q=".$query."&file=documents/".$links[$docID]."'>".$links[$docID]."</a></br>
+					relevant doc number $i : $highlightedText . $links[$docID]
 				</li>
 				";
 				$i++;
