@@ -498,7 +498,7 @@ class Indexing extends Model {
 		$sql = "TRUNCATE TABLE `term_document`";
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		// delete all files from documents directory
-		array_map('unlink', glob(dirname(__FILE__)."/documents/*.txt"));
+		array_map('unlink', glob('documents/' . '*.txt'));
 	}
 }
 

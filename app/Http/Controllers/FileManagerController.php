@@ -30,7 +30,7 @@ class FileManagerController extends Controller
                 if($file == "text/plain" && $_FILES["document"]["size"][$num]){
                     $name = $_FILES["document"]["name"][$num];
                     $content[$name] = file_get_contents($_FILES["document"]["tmp_name"][$num]);
-                    move_uploaded_file($_FILES["document"]["tmp_name"][$num], dirname(__FILE__). "\documents\\" . $name);
+                    move_uploaded_file($_FILES["document"]["tmp_name"][$num], dirname(__FILE__). "\..\..\..\public\documents\\" . $name);
                 }
             }
             $indexing->updateIndex($content);

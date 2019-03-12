@@ -11,12 +11,24 @@
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/seach_engine');
 });
 
 
 
+Route::get('/seach_engine', function () {
+    return view('search_engine');
+});
+
+Route::get('/xpath_search_engine', function () {
+    return view('xpath_search_engine');
+});
+
+Route::get('admin', function () {
+    return view('admin_template');
+});
 
 
 Route::post('/searchEngine/xpathsearch', 'xpathSearchController@search')->name('xpathsearch');

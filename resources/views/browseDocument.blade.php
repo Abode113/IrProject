@@ -24,7 +24,7 @@ $documents = $Data['Content'];
                     {{ csrf_field() }}
                     <tr>
                         <td><?=$row['document_id']?></td>
-                        <td><a href="documents/<?=$row['document_title']?>"><?=$row['document_title']?></a></td>
+                        <td><a href="{{ url('documents\\' . $row['document_title']) }}"><?=$row['document_title']?></a></td>
                         <td><button type="submit" class="btn btn-danger">Delete</button></td>
                     </tr>
                 </form>
