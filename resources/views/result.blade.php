@@ -26,7 +26,25 @@
                     </div>
                 </div>
             </form>
+            <div class="container">
+                <div class="row">
+                    <div class="">
+                        <!-- Nav tabs -->
+                        <div class="card">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <a href="#"><legend>Responsive Tabs</legend></a>
+                                    <p>If you are on desktop Try resizing the window to mobile view to see the scroll effect</p>
+                                    <p>Horizontal scrollable tabs</p>
+                                    <p>Best for mobile view</p>
+                                    <p>Similar to gravity MODE_SCROLLABLE in Android</p>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
