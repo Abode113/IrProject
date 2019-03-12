@@ -111,12 +111,13 @@ class Indexing extends Model {
 				AND `documents`.`document_id` = `term_document`.`document_id`
 				AND (`term` = '".preg_replace('/\s+/', "' OR `term` = '", $query)."') ";
 
+
 		//echo $sql;
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 
 		$data = array();
 		if (mysqli_num_rows($result) == 0){
-			echo "<p style='color:red;'>There is no relevant documents in the corpus .</p>";
+			//echo "<p style='color:red;'>There is no relevant documents in the corpus .</p>";
 			exit;
 		}
 		while( $row = mysqli_fetch_assoc($result) ){
@@ -129,7 +130,7 @@ class Indexing extends Model {
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$total_documents = mysqli_fetch_assoc($result)['N'];
 		//echo $total_documents;
-		
+
 		$relevence_docs = array();
 		//$matched_terms_in_docs = array();
 		foreach($data as $doc_item){
@@ -158,7 +159,7 @@ class Indexing extends Model {
 		while( $row = mysqli_fetch_assoc($result) ){
 			$data[] = $row;
 		}
-		
+
 		$links = array();
 		foreach ($data as $doc){
 			$links[$doc['document_id']] = $doc['document_title'];
@@ -166,31 +167,34 @@ class Indexing extends Model {
 		arsort($relevence_docs); // desending
 		
 		$i=1;
-		echo '<div class="card">
-  				<ul class="list-group list-group-flush">';
+		//echo '<div class="card">
+  		//		<ul class="list-group list-group-flush">';
         $highlight = new highlight();
+
+
 		foreach($relevence_docs as $docID => $s){
 			if($i <= 20){
-                $highlightedText = $highlight->highlight($query, dirname(__FILE__). "\documents\\".$links[$docID]);
-				echo "
-				<li class='list-group-item'>
-					relevant doc number $i : $highlightedText . $links[$docID]
-				</li>
-				";
+                $highlightedText = $highlight->highlight($query, "documents/".$links[$docID]);
+				//echo "
+				//<li class='list-group-item'>
+				//	relevant doc number $i : $highlightedText . $links[$docID]
+				//</li>
+				//";
 				$i++;
 			}
 			else{
 				break;
 			}
 		}
-		echo "</ul>
-			</div>";
+
+		//echo "</ul>
+		//	</div>";
 		
-		echo "---------------<br/><pre>";
-		print_r($relevence_docs);
-		print_r($links);
-		echo "</pre>";
-		echo "number of results is : ".count(array_unique($links));
+		//echo "---------------<br/><pre>";
+		//print_r($relevence_docs);
+		//print_r($links);
+		//echo "</pre>";
+		//echo "number of results is : ".count(array_unique($links));
 		
 	}
 	
@@ -429,8 +433,8 @@ class Indexing extends Model {
 			</div>";
 		
 		echo "---------------<br/><pre>";
-		print_r($relevence_docs);
-		print_r($links);
+		//print_r($relevence_docs);
+		//print_r($links);
 		echo "</pre>";
 		echo "number of results is : ".count(array_unique($links));
 		

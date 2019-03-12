@@ -22,7 +22,7 @@ class highlight extends Model {
         $q = explode(' ', $query);
         $text = file_get_contents($file);
         $text_array = PhrasePorterStemmer::StemPhrase(strtolower($text));
-        echo "<pre>";
+        //echo "<pre>";
         //print_r($text_array);
         //echo "query-----------------------------";
         //print_r($q);
@@ -44,7 +44,7 @@ class highlight extends Model {
         //echo "************************";
         //print_r($text_output);
         $text_highlighted = implode(' ', $text_output);
-        echo $text_highlighted;
+        //echo $text_highlighted;
 
     }
 }
