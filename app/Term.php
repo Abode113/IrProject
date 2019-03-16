@@ -26,7 +26,7 @@ class Term extends Model {
 				(`term`, `document_frequently`) 
 				VALUES ('".$term."',".$document_frequently.") 
 				ON DUPLICATE KEY UPDATE 
-				`term`='".mysqli_escape_string($conn, $term)."', `document_frequently`=`document_frequently`+".$document_frequently.", 
+				`term`='".$term."', `document_frequently`=`document_frequently`+".$document_frequently.", 
 				`term_id` = LAST_INSERT_ID(`term_id`)";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
         $termID = mysqli_insert_id($conn);

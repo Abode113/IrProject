@@ -43,8 +43,16 @@ class Indexing extends Model {
             $text_after_stemming = $phrasePorterStemmer->StemPhrase($text_without_stopWords);
 
             // insert into document table
-            $document = new Document();
-            $docID = $document->insert($name, count($text_after_stemming));
+            //$document = new Document();
+            //$docID = $document->insert($name, count($text_after_stemming));
+            //////////////////////
+            $sql = "INSERT INTO `documents` 
+				(`document_title`, `terms_count`) 
+				VALUES ('".mysqli_escape_string(self::$conn, $name)."',".count($text_after_stemming).")";
+            //echo $sql;
+            $result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
+            $docID = mysqli_insert_id(self::$conn);
+            ////////////////
 
             foreach($text_after_stemming as $location => $term) {
 				if(!isset($dictionary[$term])) {
@@ -58,8 +66,10 @@ class Indexing extends Model {
 				$dictionary[$term]['postings'][$docID]['locations'][] = $location;
 			}
 		}
+
         $sql2 = '';
 		foreach($dictionary as $term => $dict){
+
             // insert into term table
 
             $termID = $termObj->insert_conn($term, $dict['df'], self::$conn);
@@ -68,6 +78,7 @@ class Indexing extends Model {
 				$sql2 .= "(".$termID.",".$docID.",".$posting['tf'].",'".implode(",",$posting['locations'])."'),";
 			}
 		}
+
 		// insert into term document table
         $result = $term_document->insert_conn($sql2, self::$conn);
 
