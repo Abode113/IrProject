@@ -16,28 +16,30 @@ class searchController extends Controller
     }
 
     public function search(Request $request){
-        //dd($request->all());
-        $stop_words = new Stop_words();
-        $phrasePorterStemmer = new PhrasePorterStemmer();
-        $indexing = new Indexing();
 
+        $phrasePorterStemmer = new PhrasePorterStemmer();
+        $stop_words = new Stop_words();
+
+        // initializing the semantic variable
         $semantic = false;
         if(isset($request['s'])){
             $semantic = true;
         }
 
+        //remove stop words
         $Query_stopWords_removed = $stop_words->remove_stop_words(strtolower($request['Query']));
+        // stemming process
         $Query_steamed = $phrasePorterStemmer->StemPhrase($Query_stopWords_removed);
 
         if($semantic){
             Index::submit_semantic_query($Query_stopWords_removed);
         }else{
             $imploded_Query = implode(' ', $Query_steamed);
-            Indexing::submit_query($imploded_Query);
+            $FinalData = Indexing::submit_query($imploded_Query);
         }
 
         $Data = [
-            'Content' => ['Query' => $request['Query'], 'semantic' => $semantic]
+            'Content' => ['Data' => $FinalData]
         ];
 
         return view('result', compact('Data'));

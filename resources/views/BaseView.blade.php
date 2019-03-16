@@ -35,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- my style -->
     <link href="http://127.0.0.1:8000/css/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://127.0.0.1:8000/style.css" rel="stylesheet">
+    <link href="http://127.0.0.1:8000/documentation/style.css" rel="stylesheet">
     <link href="http://127.0.0.1:8000/css/google.css" rel="stylesheet">
 
 </head>
@@ -115,7 +115,7 @@ desired effect
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="height: 400px;overflow:scroll;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -129,7 +129,7 @@ desired effect
         </section>
 
         <!-- Main content -->
-        <section class="content container-fluid">
+        <section class="content">
 
             <!--------------------------
               | Your Page Content Here |

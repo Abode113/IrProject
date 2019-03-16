@@ -21,7 +21,8 @@ class highlight extends Model {
 
         $q = explode(' ', $query);
         $text = file_get_contents($file);
-        $text_array = PhrasePorterStemmer::StemPhrase(strtolower($text));
+        $text_array = $phrasePorterStemmer->StemPhrase(strtolower($text));
+
         //echo "<pre>";
         //print_r($text_array);
         //echo "query-----------------------------";
@@ -34,9 +35,11 @@ class highlight extends Model {
         }
         //print_r($keys);
         $keys = array_unique($keys);
+
         //echo "keys -----------------------------";
         //print_r($keys);
         $text_output = explode(' ', $text);
+        dd($text_output);
         foreach($keys as $k){
             //echo "hello"."</br>";
             $text_output[$k] = "<span class='highlight'>".$text_output[$k]."</span>";

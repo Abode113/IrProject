@@ -8,6 +8,9 @@ use DB;
 use App\Stop_words;
 use App\PhrasePorterStemmer;
 use App\highlight;
+use App\Document;
+use App\Term;
+use App\Term_document;
 
 class Indexing extends Model {
 	
@@ -23,31 +26,27 @@ class Indexing extends Model {
 	}
 	
 	public static function updateIndex($files_to_be_indexed){
+        $phrasePorterStemmer = new PhrasePorterStemmer();
+        $stop_words = new Stop_words();
+        $termObj = new Term();
+        $term_document = new Term_document();
+
 		$dictionary = array();
         //$docCount = array();
-		
+
 		# for each file ( 1400 times for cranfield )
 		foreach($files_to_be_indexed as $name => $file){
-			# s1 to remove common words , s2 to stem other words in the whole file
-            $stop_words = new Stop_words();
-			$s1 = $stop_words->remove_stop_words(strtolower($file));
-//			echo $s1."</br>".str_word_count($s1);exit();
-			//$s2 = array();
-            $phrasePorterStemmer = new PhrasePorterStemmer();
-			$s2 = $phrasePorterStemmer->StemPhrase($s1);
-            //var_dump($s2);exit();
-			# insertin the file title and count of words left in it , into db
 
-			$sql = "INSERT INTO `documents` 
-				(`document_title`, `terms_count`) 
-				VALUES ('".mysqli_escape_string(self::$conn, $name)."',".count($s2).")";
-			//echo $sql;
-			$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
-			$docID = mysqli_insert_id(self::$conn);
-			
-			# index the terms into the dictionary array , to be added later to db
-			//$docCount[$name] = count($s2);
-			foreach($s2 as $location => $term) {
+            // removing stop words from text of the file
+			$text_without_stopWords = $stop_words->remove_stop_words(strtolower($file));
+            // stemming process to file after removing stop words
+            $text_after_stemming = $phrasePorterStemmer->StemPhrase($text_without_stopWords);
+
+            // insert into document table
+            $document = new Document();
+            $docID = $document->insert($name, count($text_after_stemming));
+
+            foreach($text_after_stemming as $location => $term) {
 				if(!isset($dictionary[$term])) {
 					$dictionary[$term] = array('df' => 0, 'postings' => array());
 				}
@@ -58,143 +57,99 @@ class Indexing extends Model {
 				$dictionary[$term]['postings'][$docID]['tf']++;
 				$dictionary[$term]['postings'][$docID]['locations'][] = $location;
 			}
-			
-			/*echo "<pre>";
-			print_r($s2);
-			echo "</pre>";*/
 		}
-		
-		/*echo "<br/><br/>
-		--------------------------------------------------------------------------------------
-		<br/><br/>";*/
-		//echo "<pre>";
-		//print_r($dictionary);
-		//print_r($docCount);
-		//echo "</pre>";
-		
-		$sql2 = "INSERT INTO `term_document`
-			(`term_id`, `document_id`, `term_frequently`, `locations`) 
-			VALUES ";
-		# inserting the dictonary (terms) to db , one query for each term
-		# 'ON DUPLICATE KEY UPDATE' to update 'df' if exist or insert otherwise 
+        $sql2 = '';
 		foreach($dictionary as $term => $dict){
-			$sql = "INSERT INTO `terms`
-				(`term`, `document_frequently`) 
-				VALUES ('".mysqli_escape_string(self::$conn, $term)."',".$dict['df'].") 
-				ON DUPLICATE KEY UPDATE 
-				`term`='".mysqli_escape_string(self::$conn, $term)."', `document_frequently`=`document_frequently`+".$dict['df'].", 
-				`term_id` = LAST_INSERT_ID(`term_id`)";
-			/*$sql = "INSERT INTO `terms`
-				(`term`, `document_frequently`) 
-				VALUES ('".mysqli_escape_string(self::$conn, $term)."',".$dict['df'].")";*/
-			$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
-			$termID = mysqli_insert_id(self::$conn);
-			
-			# making the query of that term , for every document matches it
+            // insert into term table
+
+            $termID = $termObj->insert_conn($term, $dict['df'], self::$conn);
+
 			foreach($dict['postings'] as $docID => $posting){
 				$sql2 .= "(".$termID.",".$docID.",".$posting['tf'].",'".implode(",",$posting['locations'])."'),";
 			}
 		}
-		# delete the last comma ','
-		$sql2 = substr($sql2, 0, -1);
-		//echo "<br/>".$sql2;
-		
-		# inserting all records of term_document table in one query
-		$result = mysqli_query(self::$conn, $sql2) or die(mysqli_error(self::$conn));
+		// insert into term document table
+        $result = $term_document->insert_conn($sql2, self::$conn);
+
 	}
 	
 	public static function submit_query($query){
-		$sql = "SELECT `term`, `document_frequently`, 
-					   `documents`.`document_id`, `term_frequently`, `terms_count`
-				FROM `terms`, `documents`, `term_document`
-				WHERE `terms`.`term_id` = `term_document`.`term_id` 
-				AND `documents`.`document_id` = `term_document`.`document_id`
-				AND (`term` = '".preg_replace('/\s+/', "' OR `term` = '", $query)."') ";
 
+        $QueryWords = preg_split('/\s+/', $query);
+        $data = DB::table('term_document')
+            ->join('terms', 'terms.term_id', '=', 'term_document.term_id')
+            ->join('documents', 'documents.document_id', '=', 'term_document.document_id')
+            ->select('term', 'document_frequently', 'documents.document_id', 'term_frequently', 'terms_count')
+            ->whereIn('term', $QueryWords)
+            ->get();
 
-		//echo $sql;
-		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
-
-		$data = array();
-		if (mysqli_num_rows($result) == 0){
-			//echo "<p style='color:red;'>There is no relevant documents in the corpus .</p>";
-			exit;
-		}
-		while( $row = mysqli_fetch_assoc($result) ){
-			$data[] = $row;
-		}
-		/*echo "<pre>";
-		print_r($data);
-		echo "</pre>";*/
-		$sql = "SELECT COUNT(*) as 'N' FROM `documents`";
-		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
-		$total_documents = mysqli_fetch_assoc($result)['N'];
+        $total_documents = DB::table('documents')->count();
 		//echo $total_documents;
 
 		$relevence_docs = array();
-		//$matched_terms_in_docs = array();
+
 		foreach($data as $doc_item){
-			if(!isset($relevence_docs[$doc_item['document_id']])){
-				$relevence_docs[$doc_item['document_id']]=0;
+
+			if(!isset($relevence_docs[$doc_item->document_id])){
+				$relevence_docs[$doc_item->document_id] = 0;
 			}
-			//$matched_terms_in_docs[$doc_item['document_id']]++;
-			$relevence_docs[$doc_item['document_id']]+=
-					($doc_item['term_frequently']/$doc_item['terms_count']) *
-					log($total_documents / $doc_item['document_frequently']);
-			/*$relevence_docs[$doc_item['document_id']]+=
-					(1+log10($doc_item['term_frequently'])) *
-					log10($total_documents / $doc_item['document_frequently']);*/
-			/*$relevence_docs[$doc_item['document_id']]+=
-					($doc_item['term_frequently']) *
-					log($total_documents / $doc_item['document_frequently'], 2);*/
-			/*$relevence_docs[$doc_item['document_id']]+=
-					(0.5+0.5*$doc_item['term_frequently']) *
-					log($total_documents / $doc_item['document_frequently'], 2);*/
+//            var_dump($doc_item);
+			$relevence_docs[$doc_item->document_id] +=
+					($doc_item->term_frequently/$doc_item->terms_count) *
+					log($total_documents / $doc_item->document_frequently);
+
+			/*$relevence_docs[$doc_item->document_id]+=
+					(1+log10($doc_item->term_frequently)) *
+					log10($total_documents / $doc_item->document_frequently);*/
+			/*$relevence_docs[$doc_item->document_id]+=
+					($doc_item->term_frequently) *
+					log($total_documents / $doc_item->document_frequently, 2);*/
+			/*$relevence_docs[$doc_item->document_id]+=
+					(0.5+0.5*$doc_item->term_frequently) *
+					log($total_documents / $doc_item->document_frequently, 2);*/
 		}
 
-		$sql = "SELECT * FROM `documents`
-				WHERE `document_id` = ".implode(" OR `document_id` = ", array_keys($relevence_docs));
-		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
-		$data = array();
-		while( $row = mysqli_fetch_assoc($result) ){
-			$data[] = $row;
-		}
+        $documents = DB::table('documents')
+            ->whereIn('document_id', array_keys($relevence_docs))
+            ->get();
 
 		$links = array();
-		foreach ($data as $doc){
-			$links[$doc['document_id']] = $doc['document_title'];
+		foreach ($documents as $doc){
+			$links[$doc->document_id] = $doc->document_title;
 		}
+
 		arsort($relevence_docs); // desending
-		
+//        dd($documents);
+//        dd($links);
+//        dd($relevence_docs);
+
+        $Data = array();
 		$i=1;
-		//echo '<div class="card">
-  		//		<ul class="list-group list-group-flush">';
-        $highlight = new highlight();
-
-
 		foreach($relevence_docs as $docID => $s){
-			if($i <= 20){
-                $highlightedText = $highlight->highlight($query, "documents/".$links[$docID]);
-				//echo "
-				//<li class='list-group-item'>
-				//	relevant doc number $i : $highlightedText . $links[$docID]
-				//</li>
-				//";
+			if($i <= 20){ // return top 20 document
+			    array_push($Data, ['title' => $links[$docID],
+                                          'link' => "http://127.0.0.1:8000/documents/".$links[$docID],
+                                          //'content' =>
+                                        ]);
 				$i++;
 			}
 			else{
 				break;
 			}
 		}
+//		dd($Data);
+		return $Data;
 
-		//echo "</ul>
-		//	</div>";
-		
-		//echo "---------------<br/><pre>";
-		//print_r($relevence_docs);
-		//print_r($links);
-		//echo "</pre>";
-		//echo "number of results is : ".count(array_unique($links));
+//		$i=1;
+//		foreach($relevence_docs as $docID => $s){
+//			if($i <= 20){ // return top 20 document
+//                $highlightedText = $highlight->highlight($query, "documents/".$links[$docID]);
+//				$i++;
+//			}
+//			else{
+//				break;
+//			}
+//		}
 		
 	}
 	

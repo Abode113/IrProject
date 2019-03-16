@@ -22,6 +22,7 @@ class FileManagerController extends Controller
 //        var_dump($request['submit']);exit();
         //include_once "indexing.php";
         $content = array();
+        //dd($request['document']);
         if(isset($request['document'])){
 //            echo "<pre>";
 //            print_r($request["document"]);

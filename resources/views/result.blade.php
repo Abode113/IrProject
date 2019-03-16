@@ -2,8 +2,11 @@
 
 
 @section('body')
+    <?php
+    $content = $Data['Content']['Data'];
+    ?>
     <section class="jumbotron text-center">
-        <div class="container">
+        <div class="container" style="margin-top: -70px;">
 
             <div class="bounce" style="width: 20%">
                 <span class="letter">A</span>
@@ -30,18 +33,16 @@
                 <div class="row">
                     <div class="">
                         <!-- Nav tabs -->
-                        <div class="card">
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="home">
-                                    <a href="#"><legend>Responsive Tabs</legend></a>
-                                    <p>If you are on desktop Try resizing the window to mobile view to see the scroll effect</p>
-                                    <p>Horizontal scrollable tabs</p>
-                                    <p>Best for mobile view</p>
-                                    <p>Similar to gravity MODE_SCROLLABLE in Android</p>
-
+                        @foreach($content as $elem)
+                            <div class="card">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="home">
+                                        <a href="{{$elem['link']}}"><legend>{{$elem['title']}}</legend></a>
+                                        <p></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

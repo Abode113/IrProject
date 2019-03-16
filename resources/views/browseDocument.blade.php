@@ -7,6 +7,8 @@ $documents = $Data['Content'];
 ?>
 <div class="container">
     <br/>
+    <a href="/" class="btn btn-primary">Home
+    </a>
     <h3 style="font-weight: 300;">Current Documents :</h3><br/>
     <div class="table-responsive">
         <table id="users_table" class="table table-striped table-bordered">
@@ -36,8 +38,6 @@ $documents = $Data['Content'];
             </tbody>
         </table>
     </div>
-    <a href="/" class="btn btn-primary">Home
-    </a>
 </div>
 
 @endsection
