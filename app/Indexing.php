@@ -11,6 +11,8 @@ use App\highlight;
 use App\Document;
 use App\Term;
 use App\Term_document;
+use App\Regex;
+use App\Soundex;
 
 class Indexing extends Model {
 	
@@ -26,21 +28,44 @@ class Indexing extends Model {
 	}
 	
 	public static function updateIndex($files_to_be_indexed){
+	    // initialzing
+        ini_set('max_execution_time', 1200);
         $phrasePorterStemmer = new PhrasePorterStemmer();
         $stop_words = new Stop_words();
         $termObj = new Term();
         $term_document = new Term_document();
 
 		$dictionary = array();
-        //$docCount = array();
 
 		# for each file ( 1400 times for cranfield )
 		foreach($files_to_be_indexed as $name => $file){
 
             // removing stop words from text of the file
-			$text_without_stopWords = $stop_words->remove_stop_words(strtolower($file));
+			$text_without_stopWords = $stop_words->remove_stop_words($file);
+            $text_without_stopWords_arr = explode(' ', $text_without_stopWords);
+
             // stemming process to file after removing stop words
-            $text_after_stemming = $phrasePorterStemmer->StemPhrase($text_without_stopWords);
+            //$text_after_stemming = $phrasePorterStemmer->StemPhrase($text_without_stopWords);
+            // limitization
+            $text_after_limitization = array();
+
+            // to check date token
+            $text_without_stopWords_arr = self::includeDate($text_without_stopWords_arr);
+
+            $global_delay = 0;
+            foreach($text_without_stopWords_arr as $location => $term) {
+
+                 $arr = self::Process_the_word($term);
+
+                 $local_delay = 0;
+                 foreach ($arr as $elem){
+                     $text_after_limitization[$global_delay + $location + $local_delay] = $elem;
+                     $local_delay++;
+                 }
+
+                $global_delay += count($arr) - 1;
+
+            }
 
             // insert into document table
             //$document = new Document();
@@ -48,13 +73,17 @@ class Indexing extends Model {
             //////////////////////
             $sql = "INSERT INTO `documents` 
 				(`document_title`, `terms_count`) 
-				VALUES ('".mysqli_escape_string(self::$conn, $name)."',".count($text_after_stemming).")";
+				VALUES ('".mysqli_escape_string(self::$conn, $name)."',".count($text_after_limitization).")";
             //echo $sql;
             $result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
             $docID = mysqli_insert_id(self::$conn);
             ////////////////
 
-            foreach($text_after_stemming as $location => $term) {
+
+
+
+
+            foreach($text_after_limitization as $location => $term) {
 				if(!isset($dictionary[$term])) {
 					$dictionary[$term] = array('df' => 0, 'postings' => array());
 				}
@@ -83,8 +112,52 @@ class Indexing extends Model {
         $result = $term_document->insert_conn($sql2, self::$conn);
 
 	}
-	
-	public static function submit_query($query){
+
+    public static function Process_the_word($term){
+        $regex = new Regex();
+        $soundex = new Soundex();
+
+        $returnedVal = array();
+        if(!$regex->isName($term) && !$regex->isDate($term) && !$regex->isLink($term)){
+            array_push($returnedVal, self::get_verb_Limit($term));
+        }else if ($regex->isName($term)){
+            array_push($returnedVal, $term);
+            array_push($returnedVal, $soundex->getsoundex($term));
+        }else if ($regex->isDate($term)){
+            $var = $regex->getGeneralDate($term);
+//            array_push($returnedVal, $regex->getGeneralDate($term));
+            array_push($returnedVal, $var);
+        }else if ($regex->isLink($term)){
+            array_push($returnedVal, $regex->getGeneralLink($term));
+        }
+        return $returnedVal;
+    }
+
+    public static function includeDate($arr){
+        $regex = new Regex();
+        $newArr = array();
+        foreach ($arr as $index => $term){
+            if($regex->isYear($term) || $regex->isMonth($term) || $regex->isDay($term)){
+                if(isset($arr[$index - 1])) {
+                    if ($regex->isYear($arr[$index - 1]) || $regex->isMonth($arr[$index - 1]) || $regex->isDay($arr[$index - 1])) {
+                        //$arr[$index - 1] .= ' ' . $term;
+                        $newArr[count($newArr) - 1] .= '-' . $term;
+                    }else{
+                        array_push($newArr, $term);
+                        continue;
+                    }
+                }else{
+                    array_push($newArr, $term);
+                    continue;
+                }
+            }else{
+                array_push($newArr, $term);
+            }
+        }
+        return $newArr;
+    }
+
+    public static function submit_query($query){
 
         $QueryWords = preg_split('/\s+/', $query);
         $data = DB::table('term_document')
@@ -163,7 +236,58 @@ class Indexing extends Model {
 //		}
 		
 	}
-	
+
+    public static function get_verb_Limit ($tag){
+	    // cmd commend
+        $wn_command = '"C:/Program Files (x86)/WordNet/2.1/bin/wn" "'.$tag.'" "-synsv"';
+        $raw_synonims = shell_exec ($wn_command);
+
+        // if the word exist
+        if (! $raw_synonims) {
+            return $tag;
+        }
+
+        // get the result of cmmend
+        $matches = array ();
+        preg_match_all ("/\s+(.+)\s+=>/",
+            $raw_synonims, $matches, PREG_PATTERN_ORDER);
+
+        // if no matched result
+        if(!isset($matches[1][0])){
+            return $tag;
+        }
+
+        // get all accepted words
+        $all_stems = array();
+        foreach ($matches[1] as $match){
+            $match = explode (", ", $match);
+            foreach ($match as $word){
+                array_push($all_stems, $word);
+            }
+        }
+
+        // get the needed word
+        $stemmed_word = self::most_frequent_Word($all_stems);
+
+        // return the word
+        return $stemmed_word;
+    }
+
+    public static function most_frequent_Word($arr){
+        // new array containing frequency of values of $arr
+        $arr_freq = array_count_values($arr);
+
+        // arranging the new $arr_freq in decreasing
+        // order of occurrences
+        arsort($arr_freq);
+
+        // $new_arr containing the keys of sorted array
+        $new_arr = array_keys($arr_freq);
+
+        // Second most frequent element
+        return $new_arr[0];
+    }
+
 	public static function one_word_get_synonims ($tag){
   		$wn_command = '"C:/Program Files (x86)/WordNet/2.1/bin/wn" "'.$tag.'" "-synsn"';
   		$raw_synonims = shell_exec ($wn_command);
