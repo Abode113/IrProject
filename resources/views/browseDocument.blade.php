@@ -3,7 +3,7 @@
 @section('body')
 <?php
 $documents = $Data['Content'];
-//dd($documents);
+//dd($documents[0]);
 ?>
 <div class="container">
     <br/>
@@ -22,14 +22,23 @@ $documents = $Data['Content'];
             <tbody>
             <?php if(isset($documents[0])) {
             foreach($documents as $row){ ?>
-                <form method="post" action="{{route('deleteDocument', $row['document_id'])}}" enctype="multipart/form-data">
-                    {{ csrf_field() }}
                     <tr>
                         <td><?=$row['document_id']?></td>
                         <td><a href="{{ url('documents\\' . $row['document_title']) }}"><?=$row['document_title']?></a></td>
-                        <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                        <td>
+                            <form method="post" action="{{route('DocTerms', $row['document_id'])}}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-success">term</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="{{route('deleteDocument', $row['document_id'])}}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
                     </tr>
-                </form>
+
             <?php } } else { ?>
             <tr>
                 <td colspan="3" class="text-center">There is no Documents now</td>

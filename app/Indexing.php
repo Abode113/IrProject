@@ -46,12 +46,13 @@ class Indexing extends Model {
 
             // stemming process to file after removing stop words
             //$text_after_stemming = $phrasePorterStemmer->StemPhrase($text_without_stopWords);
-            // limitization
-            $text_after_limitization = array();
+
 
             // to check date token
             $text_without_stopWords_arr = self::includeDate($text_without_stopWords_arr);
 
+            // limitization
+            $text_after_limitization = array();
             $global_delay = 0;
             foreach($text_without_stopWords_arr as $location => $term) {
 
@@ -157,15 +158,19 @@ class Indexing extends Model {
         return $newArr;
     }
 
-    public static function submit_query($query){
-
-        $QueryWords = preg_split('/\s+/', $query);
+    public static function submit_query($queryStatment, $orginalQuery, $query, $Ngram_arr){
+        $document = new Document();
+        $term = new Term();
+        //var_dump($query);exit();
+        //$QueryWords = preg_split('/\s+/', $query);
         $data = DB::table('term_document')
             ->join('terms', 'terms.term_id', '=', 'term_document.term_id')
             ->join('documents', 'documents.document_id', '=', 'term_document.document_id')
             ->select('term', 'document_frequently', 'documents.document_id', 'term_frequently', 'terms_count')
-            ->whereIn('term', $QueryWords)
+            ->whereIn('term', $query)
             ->get();
+
+        $unseen = $term->unseen($orginalQuery, $data);
 
         $total_documents = DB::table('documents')->count();
 		//echo $total_documents;
@@ -173,68 +178,54 @@ class Indexing extends Model {
 		$relevence_docs = array();
 
 		foreach($data as $doc_item){
+            $relevance_val = ($doc_item->term_frequently/$doc_item->terms_count) *
+                log($total_documents / $doc_item->document_frequently);
 
-			if(!isset($relevence_docs[$doc_item->document_id])){
-				$relevence_docs[$doc_item->document_id] = 0;
-			}
-//            var_dump($doc_item);
-			$relevence_docs[$doc_item->document_id] +=
-					($doc_item->term_frequently/$doc_item->terms_count) *
-					log($total_documents / $doc_item->document_frequently);
+            if(!isset($relevence_docs[$doc_item->document_id])){
+                $relevence_docs[$doc_item->document_id]['document_id'] = $doc_item->document_id;
+                $relevence_docs[$doc_item->document_id]['relevance_val'] = 0;
+                $relevence_docs[$doc_item->document_id]['token'] = [];
+            }
 
-			/*$relevence_docs[$doc_item->document_id]+=
-					(1+log10($doc_item->term_frequently)) *
-					log10($total_documents / $doc_item->document_frequently);*/
-			/*$relevence_docs[$doc_item->document_id]+=
-					($doc_item->term_frequently) *
-					log($total_documents / $doc_item->document_frequently, 2);*/
-			/*$relevence_docs[$doc_item->document_id]+=
-					(0.5+0.5*$doc_item->term_frequently) *
-					log($total_documents / $doc_item->document_frequently, 2);*/
+            $relevence_docs[$doc_item->document_id]['relevance_val'] += $relevance_val;
+            if(isset($relevence_docs[$doc_item->document_id]['token'][$doc_item->term])){
+                array_push(
+                    $relevence_docs[$doc_item->document_id]['token'][$doc_item->term],
+                    [$doc_item->term, $relevance_val]);
+            }else{
+                $relevence_docs[$doc_item->document_id]['token'][$doc_item->term] = array();
+                array_push(
+                    $relevence_docs[$doc_item->document_id]['token'][$doc_item->term],
+                    [$doc_item->term, $relevance_val]);
+            }
 		}
 
-        $documents = DB::table('documents')
-            ->whereIn('document_id', array_keys($relevence_docs))
-            ->get();
+        $mostPropWords = array();
+		if (count($relevence_docs) < 10 || $unseen){
+		    if(count($relevence_docs) < 10){
+                $ngram_relevence_docs = $term->Get_nGram_relevance($Ngram_arr, $relevence_docs);
 
-		$links = array();
-		foreach ($documents as $doc){
-			$links[$doc->document_id] = $doc->document_title;
-		}
+                $unseen_docs = $term->Get_nGram_relevance(array_values($unseen), $relevence_docs);
+                $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, array_values($unseen), $unseen_docs);
+            }else{
+                $ngram_relevence_docs = $term->Get_nGram_relevance(array_values($unseen), $relevence_docs);
+                $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, $ngram_relevence_docs);
+            }
 
-		arsort($relevence_docs); // desending
-//        dd($documents);
-//        dd($links);
-//        dd($relevence_docs);
+            $relevence_docs = $term->array_merge_relvance($relevence_docs, $ngram_relevence_docs);
+        }
 
-        $Data = array();
-		$i=1;
-		foreach($relevence_docs as $docID => $s){
-			if($i <= 20){ // return top 20 document
-			    array_push($Data, ['title' => $links[$docID],
-                                          'link' => "http://127.0.0.1:8000/documents/".$links[$docID],
-                                          //'content' =>
-                                        ]);
-				$i++;
-			}
-			else{
-				break;
-			}
-		}
-//		dd($Data);
-		return $Data;
+        $relevence_docs = $document->AddDocmentData($relevence_docs);
 
-//		$i=1;
-//		foreach($relevence_docs as $docID => $s){
-//			if($i <= 20){ // return top 20 document
-//                $highlightedText = $highlight->highlight($query, "documents/".$links[$docID]);
-//				$i++;
-//			}
-//			else{
-//				break;
-//			}
-//		}
-		
+        usort($relevence_docs, function($a, $b) { // anonymous function
+            if ($a['relevance_val'] == $b['relevance_val']) {
+                return 0;
+            }
+            return ($a['relevance_val'] > $b['relevance_val']) ? -1 : 1;
+        });
+
+        $result = [$relevence_docs, $mostPropWords];
+		return $result;
 	}
 
     public static function get_verb_Limit ($tag){

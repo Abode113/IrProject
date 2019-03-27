@@ -94,10 +94,11 @@ desired effect
             <ul class="sidebar-menu tree" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                 <li><a href="/seach_engine/"><i class="fa fa-circle-o text-aqua"></i> <span>search engine</span></a></li>
-                <li><a href="/xpath_search_engine/"><i class="fa fa-circle-o text-yellow"></i> <span>xpath search engine</span></a></li>
+                {{--<li><a href="/xpath_search_engine/"><i class="fa fa-circle-o text-yellow"></i> <span>xpath search engine</span></a></li>--}}
+                <li><a href="/Term/browse/"><i class="fa fa-circle-o text-red"></i> <span>View Term</span></a></li>
                 <li><a href="/Document/browse/"><i class="fa fa-circle-o text-red"></i> <span>View Documents</span></a></li>
                 <li><a href="/FileManager/resetIndex/"><i class="fa fa-circle-o text-yellow"></i> <span>Reset Documents</span></a></li>
-                <li><a href="/similarity/browse/"><i class="fa fa-circle-o text-aqua"></i> <span>Find Similarity</span></a></li>
+                {{--<li><a href="/similarity/browse/"><i class="fa fa-circle-o text-aqua"></i> <span>Find Similarity</span></a></li>--}}
                 <form method="post" action="{{route('uploadeFile')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -122,10 +123,6 @@ desired effect
                 Page Header
                 <small>Optional description</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                <li class="active">Here</li>
-            </ol>
         </section>
 
         <!-- Main content -->

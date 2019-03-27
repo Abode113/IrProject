@@ -8,6 +8,8 @@ use DB;
 use App\Stop_words;
 use App\PhrasePorterStemmer;
 use App\Indexing;
+use App\LangDetector;
+use App\Search;
 
 class searchController extends Controller
 {
@@ -17,33 +19,35 @@ class searchController extends Controller
 
     public function search(Request $request){
 
-        $phrasePorterStemmer = new PhrasePorterStemmer();
-        $stop_words = new Stop_words();
+        $search = new Search();
 
         // initializing the semantic variable
         $semantic = false;
         if(isset($request['s'])){
             $semantic = true;
         }
-
-        //remove stop words
-        $Query_stopWords_removed = $stop_words->remove_stop_words(strtolower($request['Query']));
-        // stemming process
-        $Query_steamed = $phrasePorterStemmer->StemPhrase($Query_stopWords_removed);
-
-        if($semantic){
-            Index::submit_semantic_query($Query_stopWords_removed);
-        }else{
-            $imploded_Query = implode(' ', $Query_steamed);
-            $FinalData = Indexing::submit_query($imploded_Query);
-        }
+        $FinalData = $search->SearchOn($request['Query'], $semantic);
 
         $Data = [
-            'Content' => ['Data' => $FinalData]
+            'Content' => ['Data' => $FinalData, 'query' => $request['Query']]
         ];
 
         return view('result', compact('Data'));
     }
+
+//    function test(Request $request){
+//
+//        $search = new Search();
+//
+//        $FinalData = $search->SearchOn($request['Query'], false);
+//
+//        $Data = [
+//            'Content' => ['Data' => $FinalData, 'query' => $request['Query']]
+//        ];
+//
+//        return view('result', compact('Data'));
+//
+//    }
 }
 
 
