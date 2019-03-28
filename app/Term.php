@@ -106,23 +106,26 @@ class Term extends Model {
     }
 
     function GetRange($MaxDifference, $MaxRelevanceValue){
+        if($MaxDifference != 0){
+            return bcdiv($MaxDifference, $MaxRelevanceValue, 5);
+        }
+        return 1;
 
         $divideOn = $MaxDifference * $MaxRelevanceValue;
         if($divideOn == 0){
             $divideOn = $MaxRelevanceValue * 10;
         }
-//        $value = bcdiv($MaxRelevanceValue, $divideOn, 5);
-//        dd($divideOn);
-//        dd($MaxRelevanceValue);
-//        dd($value);
-
-        return $divideOn;
-
     }
 
     function editeRelevance($ngram_relevence_docs, $Range){
+
         foreach ($ngram_relevence_docs as $index => $elem){
-            $ngram_relevence_docs[$index]['relevance_val'] = bcdiv($elem['relevance_val'], $Range, 5);
+            $ngram_relevence_docs[$index]['relevance_val'] = $elem['relevance_val'] * $Range;
+
+//            $ngram_relevence_docs[$index]['relevance_val'] = self::divideFloat($elem['relevance_val'], $Range, 5);
+
+
+
 //            foreach ($ngram_relevence_docs[$index]['token'] as $t_index => $token){
 //                $indexes = array_keys($ngram_relevence_docs[$index]['token']);
 //                foreach ($indexes as $elem_index => $elem_token){
@@ -311,6 +314,20 @@ class Term extends Model {
             }
         }
         return $word;
+    }
+
+    function divideFloat($a, $b, $precision=3) {
+        try {var_dump($a);
+            dd($b);
+            $a *= pow(10, $precision);
+
+            $result = ((float)$a / $b);
+//        $result=($a / $b);
+            if (strlen($result) == $precision) return '0.' . $result;
+            else return preg_replace('/(\d{' . $precision . '})$/', '.\1', $result);
+        }catch(Exception $e){
+            return 0;
+        }
     }
 }
 

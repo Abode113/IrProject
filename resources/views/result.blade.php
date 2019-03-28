@@ -98,12 +98,18 @@
                 <div class="row">
                     <div class="">
                         <!-- Nav tabs -->
+                        <?php
+                        $number = 1;
+                        ?>
                         @if(isset($content))
                             @foreach($content as $elem)
                                 <div class="card">
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="home">
-                                            <a href="{{$elem['document_Link']}}"><legend>{{$elem['document_title']}}</legend></a>
+                                            <a href="{{$elem['document_Link']}}"><legend>{{$number}} - {{$elem['document_title']}}</legend></a>
+                                            <?php
+                                            $number++;
+                                            ?>
                                             <p>relevance value = {{$elem['relevance_val']}}</p> <br>
                                             <?php
                                             $indexes = array_keys($elem['token']);

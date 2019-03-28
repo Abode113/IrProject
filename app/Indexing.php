@@ -98,15 +98,16 @@ class Indexing extends Model {
 		}
 
         $sql2 = '';
+		//dd($dictionary);
 		foreach($dictionary as $term => $dict){
+            if($term != '.') {
+                // insert into term table
+                $termID = $termObj->insert_conn($term, $dict['df'], self::$conn);
 
-            // insert into term table
-
-            $termID = $termObj->insert_conn($term, $dict['df'], self::$conn);
-
-			foreach($dict['postings'] as $docID => $posting){
-				$sql2 .= "(".$termID.",".$docID.",".$posting['tf'].",'".implode(",",$posting['locations'])."'),";
-			}
+                foreach ($dict['postings'] as $docID => $posting) {
+                    $sql2 .= "(" . $termID . "," . $docID . "," . $posting['tf'] . ",'" . implode(",", $posting['locations']) . "'),";
+                }
+            }
 		}
 
 		// insert into term document table
@@ -118,12 +119,13 @@ class Indexing extends Model {
         $regex = new Regex();
         $soundex = new Soundex();
 
+        $res = self::get_verb_Limit($term);
         $returnedVal = array();
-        if(!$regex->isName($term) && !$regex->isDate($term) && !$regex->isLink($term)){
-            array_push($returnedVal, self::get_verb_Limit($term));
-        }else if ($regex->isName($term)){
+        if($res == null){ // name
             array_push($returnedVal, $term);
             array_push($returnedVal, $soundex->getsoundex($term));
+        }else if(!$regex->isDate($term) && !$regex->isLink($term)){
+            array_push($returnedVal, self::get_verb_Limit($term));
         }else if ($regex->isDate($term)){
             $var = $regex->getGeneralDate($term);
 //            array_push($returnedVal, $regex->getGeneralDate($term));
@@ -178,8 +180,9 @@ class Indexing extends Model {
 		$relevence_docs = array();
 
 		foreach($data as $doc_item){
-            $relevance_val = ($doc_item->term_frequently/$doc_item->terms_count) *
-                log($total_documents / $doc_item->document_frequently);
+            $relevance_val = ($doc_item->term_frequently*50000/$doc_item->terms_count) *
+                (log($total_documents / $doc_item->document_frequently) + 1);
+
 
             if(!isset($relevence_docs[$doc_item->document_id])){
                 $relevence_docs[$doc_item->document_id]['document_id'] = $doc_item->document_id;
@@ -201,15 +204,20 @@ class Indexing extends Model {
 		}
 
         $mostPropWords = array();
+
 		if (count($relevence_docs) < 10 || $unseen){
 		    if(count($relevence_docs) < 10){
                 $ngram_relevence_docs = $term->Get_nGram_relevance($Ngram_arr, $relevence_docs);
 
                 $unseen_docs = $term->Get_nGram_relevance(array_values($unseen), $relevence_docs);
-                $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, array_values($unseen), $unseen_docs);
+                if($unseen) {
+                    $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, array_values($unseen), $unseen_docs);
+                }
             }else{
                 $ngram_relevence_docs = $term->Get_nGram_relevance(array_values($unseen), $relevence_docs);
-                $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, $ngram_relevence_docs);
+                if($unseen) {
+                    $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, $ngram_relevence_docs);
+                }
             }
 
             $relevence_docs = $term->array_merge_relvance($relevence_docs, $ngram_relevence_docs);
@@ -235,7 +243,7 @@ class Indexing extends Model {
 
         // if the word exist
         if (! $raw_synonims) {
-            return $tag;
+            return null;
         }
 
         // get the result of cmmend
