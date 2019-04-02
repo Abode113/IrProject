@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fd27c90d-c7a2-4bfc-a3ea-22b5ef9f3324" name="Default Changelist" comment="DataBase Backup has been commited">
       <change afterPath="$PROJECT_DIR$/public/.github/ISSUE_TEMPLATE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/Gruntfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/bower.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/bower_components/Flot/.bower.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/bower_components/Flot/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/bower_components/Flot/.travis.yml" afterDir="false" />
@@ -6928,8 +6922,6 @@
       <change afterPath="$PROJECT_DIR$/public/build/less/treeview.less" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/build/less/users-list.less" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/build/less/variables.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/changelog.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/composer.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/dist/css/AdminLTE.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/dist/css/AdminLTE.min.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/dist/css/adminlte.css.map" afterDir="false" />
@@ -7441,10 +7433,6 @@
       <change afterPath="$PROJECT_DIR$/public/documents/97.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/documents/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/documents/99.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/index2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/package.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/pages/UI/buttons.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/pages/UI/general.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/pages/UI/icons.html" afterDir="false" />
@@ -7623,8 +7611,6 @@
       <change afterPath="$PROJECT_DIR$/public/plugins/timepicker/bootstrap-timepicker.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/plugins/timepicker/bootstrap-timepicker.min.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/plugins/timepicker/bootstrap-timepicker.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/starter.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -8130,7 +8116,7 @@
       <workItem from="1553919547925" duration="619000" />
       <workItem from="1554015873679" duration="629000" />
       <workItem from="1554167212056" duration="3056000" />
-      <workItem from="1554174847724" duration="2785000" />
+      <workItem from="1554174847724" duration="3210000" />
     </task>
     <task id="LOCAL-00001" summary="initail commit">
       <created>1552073198181</created>
@@ -8230,11 +8216,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554170778123</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="DataBase Backup has been commited">
+      <created>1554188312202</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1554188312202</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191040000" />
+    <option name="totallyTimeSpent" value="191465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
