@@ -22,6 +22,7 @@ class Regex extends Model {
 // ------------------------
 
     public $regex_Link = '/^(^|\s)((https?:\/\/)?[\w-]+(\.[a-z-]+)+\.?(:\d+)?(\/\S*)?)$/';
+    public $G_regex_Link = '/([\w-]+(\.[a-z-]+)+\.?(:\d+)?)/';
 //    bit.ly/00a0sa0sasaxsdd
 //    http://bit.ly/00a0sa0sasaxsdd
 //    https://bit.ly/00a0sa0sasaxsdd
@@ -54,7 +55,7 @@ class Regex extends Model {
 
 // ------------------------
 
-    public $regex_date = "/^([12]\d{3}[\',. -](((0[1-9]|1[0-2]|[1-9])|([J|j]an|[J|j]anuary|[F|f]eb|[F|f]ebruary|[M|m]ar|[M|m]arch|[A|a]pr|[A|a]pril|[M|m]ay|[J|j]un|[J|j]une|[J|j]ul|[J|j]uly|[A|a]ug|[A|a]ugust|[S|s]ep|[S|s]eptember|[O|o]ct|[O|o]ctober|[N|n]ov|[N|n]ovember|[D|d]ec|[D|d]ecember))[\',. -](0[1-9]|[12]\d|3[01]))|((0[1-9]|[12]\d|3[01])[\',. -]((0[1-9]|1[0-2]|[1-9])|([J|j]an|[J|j]anuary|[F|f]eb|[F|f]ebruary|[M|m]ar|[M|m]arch|[A|a]pr|[A|a]pril|[M|m]ay|[J|j]un|[J|j]une|[J|j]ul|[J|j]uly|[A|a]ug|[A|a]ugust|[S|s]ep|[S|s]eptember|[O|o]ct|[O|o]ctober|[N|n]ov|[N|n]ovember|[D|d]ec|[D|d]ecember))))|((((0[1-9]|1[0-2]|[1-9])|([J|j]an|[J|j]anuary|[F|f]eb|[F|f]ebruary|[M|m]ar|[M|m]arch|[A|a]pr|[A|a]pril|[M|m]ay|[J|j]un|[J|j]une|[J|j]ul|[J|j]uly|[A|a]ug|[A|a]ugust|[S|s]ep|[S|s]eptember|[O|o]ct|[O|o]ctober|[N|n]ov|[N|n]ovember|[D|d]ec|[D|d]ecember))[\',. -](0[1-9]|[12]\d|3[01]))|((0[1-9]|[12]\d|3[01])[\',. -]((0[1-9]|1[0-2]|[1-9])|([J|j]an|[J|j]anuary|[F|f]eb|[F|f]ebruary|[M|m]ar|[M|m]arch|[A|a]pr|[A|a]pril|[M|m]ay|[J|j]un|[J|j]une|[J|j]ul|[J|j]uly|[A|a]ug|[A|a]ugust|[S|s]ep|[S|s]eptember|[O|o]ct|[O|o]ctober|[N|n]ov|[N|n]ovember|[D|d]ec|[D|d]ecember)))[\',. -][12]\d{3})$/";
+    public $regex_date = "/^([12]\d{3}[\',. -](((0[1-9]|1[0-2]|[1-9])|([J|j]an|[J|j]anuary|[F|f]eb|[F|f]ebruary|[M|m]ar|[M|m]arch|[A|a]pr|[A|a]pril|[M|m]ay|[J|j]un|[J|j]une|[J|j]ul|[J|j]uly|[A|a]ug|[A|a]ugust|[S|s]ep|[S|s]eptember|[O|o]ct|[O|o]ctober|[N|n]ov|[N|n]ovember|[D|d]ec|[D|d]ecember|JAN|JANUARY|FEB|FEBRUARY|MAR|MARCH|APR|APRIL|MAY|JUN|JUNE|JUL|JULY|AUG|AUGUST|SEP|SEPTEMBER|OCT|OCTOBER|NOV|NOVEMBER|DEC|DECEMBER))[\',. -](0[1-9]|[12]\d|3[01]))|((0[1-9]|[12]\d|3[01])[\',. -]((0[1-9]|1[0-2]|[1-9])|([J|j]an|[J|j]anuary|[F|f]eb|[F|f]ebruary|[M|m]ar|[M|m]arch|[A|a]pr|[A|a]pril|[M|m]ay|[J|j]un|[J|j]une|[J|j]ul|[J|j]uly|[A|a]ug|[A|a]ugust|[S|s]ep|[S|s]eptember|[O|o]ct|[O|o]ctober|[N|n]ov|[N|n]ovember|[D|d]ec|[D|d]ecember|JAN|JANUARY|FEB|FEBRUARY|MAR|MARCH|APR|APRIL|MAY|JUN|JUNE|JUL|JULY|AUG|AUGUST|SEP|SEPTEMBER|OCT|OCTOBER|NOV|NOVEMBER|DEC|DECEMBER))))|((((0[1-9]|1[0-2]|[1-9])|([J|j]an|[J|j]anuary|[F|f]eb|[F|f]ebruary|[M|m]ar|[M|m]arch|[A|a]pr|[A|a]pril|[M|m]ay|[J|j]un|[J|j]une|[J|j]ul|[J|j]uly|[A|a]ug|[A|a]ugust|[S|s]ep|[S|s]eptember|[O|o]ct|[O|o]ctober|[N|n]ov|[N|n]ovember|[D|d]ec|[D|d]ecember|JAN|JANUARY|FEB|FEBRUARY|MAR|MARCH|APR|APRIL|MAY|JUN|JUNE|JUL|JULY|AUG|AUGUST|SEP|SEPTEMBER|OCT|OCTOBER|NOV|NOVEMBER|DEC|DECEMBER))[\',. -](0[1-9]|[12]\d|3[01]))|((0[1-9]|[12]\d|3[01])[\',. -]((0[1-9]|1[0-2]|[1-9])|([J|j]an|[J|j]anuary|[F|f]eb|[F|f]ebruary|[M|m]ar|[M|m]arch|[A|a]pr|[A|a]pril|[M|m]ay|[J|j]un|[J|j]une|[J|j]ul|[J|j]uly|[A|a]ug|[A|a]ugust|[S|s]ep|[S|s]eptember|[O|o]ct|[O|o]ctober|[N|n]ov|[N|n]ovember|[D|d]ec|[D|d]ecember|JAN|JANUARY|FEB|FEBRUARY|MAR|MARCH|APR|APRIL|MAY|JUN|JUNE|JUL|JULY|AUG|AUGUST|SEP|SEPTEMBER|OCT|OCTOBER|NOV|NOVEMBER|DEC|DECEMBER)))[\',. -][12]\d{3})$/";
 //    2000-01-01
 //    2000 01 01
 //    01 01 2000
@@ -114,10 +115,14 @@ class Regex extends Model {
 
 
     public function isLink($term){
+//        var_dump($term);
+//        var_dump(preg_match($this->regex_Link, $term));
         return preg_match($this->regex_Link, $term);
     }
     public function getGeneralLink($term){
-        return $term;
+        $match = '';
+        preg_match($this->G_regex_Link, $term, $match);
+        return $match[0];
     }
 
 
@@ -138,8 +143,7 @@ class Regex extends Model {
     public function isDay($term){
         return preg_match($this->regex_Day, $term);
     }
-    public function getGeneralDate($term){
-        //var_dump($term);
+    public function  getGeneralDate($term){
         return date("m-d-Y", strtotime($term));
     }
 

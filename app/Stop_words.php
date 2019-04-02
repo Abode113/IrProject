@@ -49,8 +49,8 @@ class Stop_words extends Model {
             'LATTER','LATTERLY','LEAST','LESS','LEST','LET','LET\'S','LIKE','LIKED','LIKELY',
             'LIKEWISE','LITTLE','LONG','LONGER','LOOK','LOOKING','LOOKS','LOW','LOT','LOWER','LTD','M','MADE',
             'MAINLY','MAKE','MAKES','MAKING','MAN','MEN','MANY','MATTER','MAY','MAYBE','MAYN\'T','ME','MEAN','MEANS','MEANTIME',
-            'MEANWHILE','MERELY','MIGHT','MIGHTN\'T','MILES','MILLION','MINE','MINUS','MISS','MORE','MOREOVER','MORNING',
-            'MOST','MOSTLY','MOMENT','MONTH','MR','MRS','MUCH','MUST','MUSTN\'T','MY','MYSELF','N','NAME','NAMED',
+            'MEANWHILE','MERELY','MIGHT','MIGHTN\'T','MILES','MILLION','MINE','MINUS','MORE','MOREOVER','MORNING',
+            'MOST','MOSTLY','MOMENT','MONTH','MUCH','MUST','MUSTN\'T','MY','MYSELF','N','NAME','NAMED',
             'NAMELY','ND','NEAR','NEARLY','NECESSARY','NEED','NEEDED','NEEDN\'T','NEEDS','NEITHER',
             'NEVER','NEVERF','NEVERLESS','NEVERTHELESS','NEW','NEXT','NIGHT','NINE','NINETY','NO',
             'NOBODY','NON','NONE','NONETHELESS','NOONE','NO-ONE','NOR','NORMALLY','NOT',
@@ -122,8 +122,8 @@ class Stop_words extends Model {
             'latter','latterly','least','less','lest','let','let\'s','like','liked','likely',
             'likewise','little','long','longer','look','looking','looks','low','lot','lower','ltd','m','made',
             'mainly','make','makes','making','man','men','many','matter','may','maybe','mayn\'t','me','mean','means','meantime',
-            'meanwhile','merely','might','mightn\'t','miles','million','mine','minus','miss','more','moreover','morning',
-            'most','mostly','moment','month','mr','mrs','much','must','mustn\'t','my','myself','n','name','named',
+            'meanwhile','merely','might','mightn\'t','miles','million','mine','minus','more','moreover','morning',
+            'most','mostly','moment','month','much','must','mustn\'t','my','myself','n','name','named',
             'namely','nd','near','nearly','necessary','need','needed','needn\'t','needs','neither',
             'never','neverf','neverless','nevertheless','new','next','night','nine','ninety','no',
             'nobody','non','none','nonetheless','noone','no-one','nor','normally','not',
@@ -159,8 +159,8 @@ class Stop_words extends Model {
             'would','wouldn\'t','x','y','yes','yet','year','years','you','you\'d','you\'ll','your','you\'re','yours',
             'yourself','yourselves','you\'ve','z','zero'
         );
-        //  'com'  ,  '.' , 'co.'   has been deleted
-        $str = preg_replace('/\b('.implode('|',$commonWords).')\b|(|\,|\:|\/|\"|\'|\;|\?|\(|\)|\!|\&|\-|\_)/','',$input);
+        //  'com'  ,  '.' , 'co.' ':'  '/' '-' has been deleted
+        $str = preg_replace('/\b('.implode('|',$commonWords).')\b|(|\,||\"|\'|\;|\?|\(|\)|\!|\&|\_)/','',$input);
         return preg_replace('/\s+/', ' ', trim($str));
     }
 }

@@ -107,14 +107,15 @@ class Term extends Model {
 
     function GetRange($MaxDifference, $MaxRelevanceValue){
         if($MaxDifference != 0){
-            return bcdiv($MaxDifference, $MaxRelevanceValue, 5);
+            //return bcdiv($MaxDifference, $MaxRelevanceValue, 5);
+            return 0;
         }
         return 1;
 
-        $divideOn = $MaxDifference * $MaxRelevanceValue;
-        if($divideOn == 0){
-            $divideOn = $MaxRelevanceValue * 10;
-        }
+//        $divideOn = $MaxDifference * $MaxRelevanceValue;
+//        if($divideOn == 0){
+//            $divideOn = $MaxRelevanceValue * 10;
+//        }
     }
 
     function editeRelevance($ngram_relevence_docs, $Range){

@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd27c90d-c7a2-4bfc-a3ea-22b5ef9f3324" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/TermConroller.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/LangDetector.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Search.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/browseTerm.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Document.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Document.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/searchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/searchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/viewDocumentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/viewDocumentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/cran.5.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Indexing.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Indexing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Regex.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Regex.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Search.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Stop_words.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Stop_words.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Term.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Term.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/BaseView.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BaseView.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/browseDocument.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/browseDocument.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/result.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/result.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/search_engine.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/search_engine.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +34,11 @@
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.open.time.36" value="1" />
+          <entry key="project.open.time.38" value="1" />
+          <entry key="project.open.time.42" value="1" />
+          <entry key="project.open.time.53" value="1" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -48,18 +47,18 @@
           <entry key="env" value="2" />
           <entry key="html" value="12" />
           <entry key="js" value="2" />
-          <entry key="php" value="128" />
+          <entry key="php" value="138" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="2" />
-          <entry key="Blade" value="36" />
+          <entry key="Blade" value="38" />
           <entry key="CSS" value="4" />
           <entry key="HTML" value="12" />
           <entry key="JavaScript" value="2" />
-          <entry key="PHP" value="92" />
+          <entry key="PHP" value="100" />
           <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
@@ -69,19 +68,19 @@
           <entry key="env" value="4" />
           <entry key="html" value="6" />
           <entry key="js" value="1" />
-          <entry key="php" value="15343" />
-          <entry key="txt" value="468" />
+          <entry key="php" value="17044" />
+          <entry key="txt" value="705" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="4" />
-          <entry key="Blade" value="2046" />
+          <entry key="Blade" value="2080" />
           <entry key="CSS" value="101" />
           <entry key="HTML" value="6" />
           <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="13297" />
-          <entry key="PLAIN_TEXT" value="468" />
+          <entry key="PHP" value="14964" />
+          <entry key="PLAIN_TEXT" value="705" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -93,33 +92,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Indexing.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-155">
-              <caret line="161" column="28" selection-start-line="161" selection-start-column="28" selection-end-line="161" selection-end-column="28" />
-              <folding>
-                <element signature="e#23#62#0#PHP" expanded="true" />
-                <marker date="1553584199675" expanded="true" signature="6789:6932" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/browseDocument.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="30" column="51" lean-forward="true" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Document.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="75" column="37" lean-forward="true" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
+            <state relative-caret-position="286">
+              <caret line="245" selection-start-line="245" selection-end-line="245" />
               <folding>
                 <element signature="e#23#62#0#PHP" expanded="true" />
               </folding>
@@ -128,19 +105,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Term_document.php">
+        <entry file="file://$PROJECT_DIR$/app/Regex.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="777">
+              <caret line="39" column="75" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="75" />
+              <folding>
+                <element signature="e#23#62#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/viewDocumentController.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/searchController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+            <state relative-caret-position="483">
+              <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
               </folding>
@@ -149,43 +129,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
+        <entry file="file://$PROJECT_DIR$/app/Search.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="39" column="93" selection-start-line="39" selection-start-column="85" selection-end-line="39" selection-end-column="93" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TermConroller.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="31" column="27" lean-forward="true" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
+            <state relative-caret-position="525">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
               <folding>
-                <element signature="e#40#68#0#PHP" expanded="true" />
+                <element signature="e#23#62#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/browseTerm.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Stop_words.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="34" column="54" lean-forward="true" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
+            <state relative-caret-position="2478">
+              <caret line="120" column="19" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
+              <folding>
+                <element signature="e#23#62#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/BaseView.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="328">
+              <caret line="107" column="24" selection-start-line="107" selection-start-column="24" selection-end-line="107" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Term.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
-              <folding>
-                <element signature="e#23#62#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="223">
+              <caret line="252" column="83" selection-start-line="252" selection-start-column="71" selection-end-line="252" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -202,36 +182,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$max_length</find>
-      <find>$Ngram_arr</find>
+      <find>NEVER</find>
+      <find>PUT</find>
+      <find>TEN</find>
+      <find>THING</find>
+      <find>TIME</find>
+      <find>VERY</find>
+      <find>WAY</find>
+      <find>YET</find>
+      <find>proces</find>
+      <find>get_verb_Limit</find>
+      <find>$regex_Link</find>
+      <find>regex_Link</find>
+      <find>array_push</find>
+      <find>\/</find>
+      <find>Master</find>
+      <find>Mr</find>
+      <find>Miss</find>
+      <find>exit()</find>
+      <find>Process_the_word</find>
+      <find>Ms</find>
+      <find>Mx</find>
+      <find>Dr</find>
+      <find>Professor</find>
+      <find>isLink</find>
+      <find>QC</find>
+      <find>bcdiv</find>
+      <find>5000</find>
+      <find>editeRelevance</find>
+      <find>ProcessRelevance</find>
       <find>GetMostPropableWordUnseen</find>
-      <find>$MostPropableWord</find>
-      <find>$content</find>
-      <find>Recently Added Products</find>
-      <find>level</find>
-      <find>leve</find>
-      <find>$semantic</find>
-      <find>$request['Query']</find>
-      <find>sams</find>
-      <find>view</find>
-      <find>products</find>
-      <find>x</find>
-      <find>-45</find>
-      <find>xpat</find>
-      <find>$mostPropWords</find>
-      <find>query</find>
-      <find>$query</find>
-      <find>$removed_stop_words</find>
-      <find>$MostPropableWord_statment</find>
-      <find>get()</find>
-      <find>DB::table</find>
-      <find>db::</find>
-      <find>@if</find>
-      <find>Document(</find>
-      <find>$document</find>
-      <find>Document</find>
-      <find>$documents</find>
-      <find>getDocumentByTremID</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -276,23 +256,23 @@
         <option value="$PROJECT_DIR$/app/term_document.php" />
         <option value="$PROJECT_DIR$/app/Term_document.php" />
         <option value="$PROJECT_DIR$/app/regex.php" />
-        <option value="$PROJECT_DIR$/app/Stop_words.php" />
         <option value="$PROJECT_DIR$/app/Soundex.php" />
-        <option value="$PROJECT_DIR$/app/Regex.php" />
         <option value="$PROJECT_DIR$/app/LangDetector.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/searchController.php" />
         <option value="$PROJECT_DIR$/public/index2.html" />
-        <option value="$PROJECT_DIR$/app/Search.php" />
-        <option value="$PROJECT_DIR$/resources/views/BaseView.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/result.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/browseTerm.blade.php" />
-        <option value="$PROJECT_DIR$/app/Indexing.php" />
         <option value="$PROJECT_DIR$/app/Document.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/viewDocumentController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/browseDocument.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TermConroller.php" />
+        <option value="$PROJECT_DIR$/resources/views/result.blade.php" />
+        <option value="$PROJECT_DIR$/app/Search.php" />
+        <option value="$PROJECT_DIR$/app/Regex.php" />
+        <option value="$PROJECT_DIR$/app/Stop_words.php" />
+        <option value="$PROJECT_DIR$/resources/views/BaseView.blade.php" />
         <option value="$PROJECT_DIR$/app/Term.php" />
+        <option value="$PROJECT_DIR$/app/Indexing.php" />
       </list>
     </option>
   </component>
@@ -414,7 +394,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -496,6 +475,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -549,7 +529,11 @@
       <workItem from="1553166802951" duration="40327000" />
       <workItem from="1553379515126" duration="14079000" />
       <workItem from="1553446300782" duration="34497000" />
-      <workItem from="1553652820029" duration="3858000" />
+      <workItem from="1553652820029" duration="23662000" />
+      <workItem from="1553887580763" duration="585000" />
+      <workItem from="1553919547925" duration="619000" />
+      <workItem from="1554015873679" duration="629000" />
+      <workItem from="1554167212056" duration="2311000" />
     </task>
     <task id="LOCAL-00001" summary="initail commit">
       <created>1552073198181</created>
@@ -621,11 +605,25 @@
       <option name="project" value="LOCAL" />
       <updated>1553279001380</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="all the job has been accomplish&#10;remainning :&#10;1 - test on teacher corpus&#10;2 - make sure on result on wanted query &#10;3 - make sure on regular expression on name and date">
+      <created>1553656897438</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1553656897438</updated>
+    </task>
+    <task id="LOCAL-00012" summary="every thing working correctly wihtout checking the Date">
+      <created>1553748226553</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1553748226553</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163562000" />
+    <option name="totallyTimeSpent" value="187510000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -633,7 +631,7 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.20201342" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.21275167" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="0" weight="0.3297587" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.28820375" />
@@ -672,7 +670,9 @@
     <MESSAGE value="last step before finishe the base" />
     <MESSAGE value="fixing bugs" />
     <MESSAGE value="limitization and date and links regular expression is accomplish to document when upload" />
-    <option name="LAST_COMMIT_MESSAGE" value="limitization and date and links regular expression is accomplish to document when upload" />
+    <MESSAGE value="all the job has been accomplish&#10;remainning :&#10;1 - test on teacher corpus&#10;2 - make sure on result on wanted query &#10;3 - make sure on regular expression on name and date" />
+    <MESSAGE value="every thing working correctly wihtout checking the Date" />
+    <option name="LAST_COMMIT_MESSAGE" value="every thing working correctly wihtout checking the Date" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/resetIndex.php">
@@ -841,9 +841,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="16" column="43" lean-forward="true" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -851,16 +848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Stop_words.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -882,9 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="653">
           <caret line="65" column="26" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -928,68 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/searchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/BaseView.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="97" column="42" selection-start-line="97" selection-start-column="42" selection-end-line="97" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/result.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FileManagerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Regex.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Indexing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-155">
-          <caret line="161" column="28" selection-start-line="161" selection-start-column="28" selection-end-line="161" selection-end-column="28" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-            <marker date="1553584199675" expanded="true" signature="6789:6932" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/browseTerm.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -1011,10 +933,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Term_document.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TermConroller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="399">
+          <caret line="31" column="27" lean-forward="true" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1022,9 +944,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="75" column="37" lean-forward="true" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FileManagerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/result.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="108" column="103" selection-start-line="108" selection-start-column="103" selection-end-line="108" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Term_document.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
@@ -1032,26 +972,67 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
           <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Regex.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="39" column="75" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="75" />
+          <folding>
+            <element signature="e#23#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/searchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TermConroller.php">
+    <entry file="file://$PROJECT_DIR$/app/Search.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="31" column="27" lean-forward="true" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
+        <state relative-caret-position="525">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
+            <element signature="e#23#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Stop_words.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2478">
+          <caret line="120" column="19" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
+          <folding>
+            <element signature="e#23#62#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Term.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="223">
+          <caret line="252" column="83" selection-start-line="252" selection-start-column="71" selection-end-line="252" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/BaseView.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="107" column="24" selection-start-line="107" selection-start-column="24" selection-end-line="107" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Indexing.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="245" selection-start-line="245" selection-end-line="245" />
           <folding>
             <element signature="e#23#62#0#PHP" expanded="true" />
           </folding>

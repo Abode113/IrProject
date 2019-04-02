@@ -11,6 +11,7 @@ class Search extends Model {
     function __construct(){
 
     }
+    //Match Function
     function SearchOn($query, $Semantic){
 
         $phrasePorterStemmer = new PhrasePorterStemmer();

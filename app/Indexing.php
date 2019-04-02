@@ -51,6 +51,9 @@ class Indexing extends Model {
             // to check date token
             $text_without_stopWords_arr = self::includeDate($text_without_stopWords_arr);
 
+            // to check Name
+            //$text_without_stopWords_arr = self::includeName($text_without_stopWords_arr);
+
             // limitization
             $text_after_limitization = array();
             $global_delay = 0;
@@ -118,20 +121,22 @@ class Indexing extends Model {
     public static function Process_the_word($term){
         $regex = new Regex();
         $soundex = new Soundex();
-
         $res = self::get_verb_Limit($term);
         $returnedVal = array();
-        if($res == null){ // name
+        if($regex->isDate($term) || $regex->isLink($term)){
+            if ($regex->isDate($term)){
+                $var = $regex->getGeneralDate($term);
+//            array_push($returnedVal, $regex->getGeneralDate($term));
+                array_push($returnedVal, $var);
+            }else if ($regex->isLink($term)){
+                array_push($returnedVal, $regex->getGeneralLink($term));
+            }
+        }else if($res == null){ // name
+
             array_push($returnedVal, $term);
             array_push($returnedVal, $soundex->getsoundex($term));
-        }else if(!$regex->isDate($term) && !$regex->isLink($term)){
+        }else{
             array_push($returnedVal, self::get_verb_Limit($term));
-        }else if ($regex->isDate($term)){
-            $var = $regex->getGeneralDate($term);
-//            array_push($returnedVal, $regex->getGeneralDate($term));
-            array_push($returnedVal, $var);
-        }else if ($regex->isLink($term)){
-            array_push($returnedVal, $regex->getGeneralLink($term));
         }
         return $returnedVal;
     }
@@ -156,6 +161,30 @@ class Indexing extends Model {
             }else{
                 array_push($newArr, $term);
             }
+        }
+        return $newArr;
+    }
+
+    public static function includeName($arr){
+        $regex = new Regex();
+        $newArr = array();
+        foreach ($arr as $index => $term){
+//            if($regex->isYear($term) || $regex->isMonth($term) || $regex->isDay($term)){
+//                if(isset($arr[$index - 1])) {
+//                    if ($regex->isYear($arr[$index - 1]) || $regex->isMonth($arr[$index - 1]) || $regex->isDay($arr[$index - 1])) {
+//                        //$arr[$index - 1] .= ' ' . $term;
+//                        $newArr[count($newArr) - 1] .= '-' . $term;
+//                    }else{
+//                        array_push($newArr, $term);
+//                        continue;
+//                    }
+//                }else{
+//                    array_push($newArr, $term);
+//                    continue;
+//                }
+//            }else{
+//                array_push($newArr, $term);
+//            }
         }
         return $newArr;
     }
@@ -216,7 +245,7 @@ class Indexing extends Model {
             }else{
                 $ngram_relevence_docs = $term->Get_nGram_relevance(array_values($unseen), $relevence_docs);
                 if($unseen) {
-                    $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, $ngram_relevence_docs);
+                    $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, array_values($unseen), $ngram_relevence_docs);
                 }
             }
 
