@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd27c90d-c7a2-4bfc-a3ea-22b5ef9f3324" name="Default Changelist" comment="DataBase Backup has been commited">
+    <list default="true" id="fd27c90d-c7a2-4bfc-a3ea-22b5ef9f3324" name="Default Changelist" comment="public folder">
       <change afterPath="$PROJECT_DIR$/public/bower_components/Flot/.bower.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/bower_components/Flot/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/bower_components/Flot/.travis.yml" afterDir="false" />
@@ -6852,150 +6852,6 @@
       <change afterPath="$PROJECT_DIR$/public/dist/js/demo.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/dist/js/pages/dashboard.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/dist/js/pages/dashboard2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/bootstrap-slider/bootstrap-slider.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/bootstrap-slider/slider.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/_all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/aero.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/aero.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/aero@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/blue@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/flat.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/flat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/flat@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/green@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/grey.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/grey@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/orange.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/orange.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/orange@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/pink.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/pink.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/pink@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/purple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/purple@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/red@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/flat/yellow@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/futurico/futurico.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/futurico/futurico.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/futurico/futurico@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/icheck.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/icheck.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/_all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/aero.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/grey.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/line.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/line@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/orange.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/pink.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/line/yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/_all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/aero.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/aero.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/aero@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/blue@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/green@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/grey.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/grey@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/minimal.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/minimal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/minimal@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/orange.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/orange.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/orange@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/pink.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/pink.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/pink@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/purple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/purple@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/red@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/minimal/yellow@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/polaris/polaris.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/polaris/polaris.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/polaris/polaris@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/_all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/aero.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/aero.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/aero@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/blue@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/green@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/grey.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/grey@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/orange.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/orange.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/orange@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/pink.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/pink.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/pink@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/purple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/purple@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/red@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/square.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/square.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/square@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/iCheck/square/yellow@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/jquery.inputmask.date.extensions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/jquery.inputmask.extensions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/jquery.inputmask.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/jquery.inputmask.numeric.extensions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/jquery.inputmask.phone.extensions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/jquery.inputmask.regex.extensions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/phone-codes/phone-be.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/phone-codes/phone-codes.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/input-mask/phone-codes/readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/jQueryUI/jquery-ui.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/jQueryUI/jquery-ui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/jvectormap/jquery-jvectormap-1.2.2.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/jvectormap/jquery-jvectormap-usa-en.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/pace/pace.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/pace/pace.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/pace/pace.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/pace/pace.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/timepicker/bootstrap-timepicker.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/timepicker/bootstrap-timepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/timepicker/bootstrap-timepicker.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/plugins/timepicker/bootstrap-timepicker.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -7058,7 +6914,7 @@
           <entry key="html" value="6" />
           <entry key="js" value="1" />
           <entry key="php" value="17044" />
-          <entry key="txt" value="834" />
+          <entry key="txt" value="847" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -7069,7 +6925,7 @@
           <entry key="HTML" value="6" />
           <entry key="JavaScript" value="1" />
           <entry key="PHP" value="14964" />
-          <entry key="PLAIN_TEXT" value="834" />
+          <entry key="PLAIN_TEXT" value="847" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -7084,8 +6940,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Indexing.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="245" selection-start-line="245" selection-end-line="245" />
+            <state relative-caret-position="391">
+              <caret line="250" lean-forward="true" selection-start-line="250" selection-end-line="250" />
               <folding>
                 <element signature="e#23#62#0#PHP" expanded="true" />
               </folding>
@@ -7501,7 +7357,7 @@
       <workItem from="1553919547925" duration="619000" />
       <workItem from="1554015873679" duration="629000" />
       <workItem from="1554167212056" duration="3056000" />
-      <workItem from="1554174847724" duration="3619000" />
+      <workItem from="1554174847724" duration="7111000" />
     </task>
     <task id="LOCAL-00001" summary="initail commit">
       <created>1552073198181</created>
@@ -7636,11 +7492,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554188750392</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="DataBase Backup has been commited">
+      <created>1554191176099</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1554191176099</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191874000" />
+    <option name="totallyTimeSpent" value="195366000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -8051,8 +7914,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Indexing.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="245" selection-start-line="245" selection-end-line="245" />
+        <state relative-caret-position="391">
+          <caret line="250" lean-forward="true" selection-start-line="250" selection-end-line="250" />
           <folding>
             <element signature="e#23#62#0#PHP" expanded="true" />
           </folding>
