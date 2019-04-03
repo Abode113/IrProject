@@ -47,20 +47,26 @@ class Term extends Model {
 
     function insert_conn($term, $document_frequently, $conn){
 
+        $sql = "SELECT max(term_id) as 'N' FROM `terms`";
+        $result = mysqli_query($conn, $sql) or die(mysqli_error(self::$conn));
+        $id = mysqli_fetch_assoc($result)['N'] + 1;
+        if($id == null){
+            $id = 0;
+        }
+
         $sql = "INSERT INTO `terms`
-				(`term`, `document_frequently`) 
-				VALUES ('".$term."',".$document_frequently.") 
+				(`term_id`, `term`, `document_frequently`) 
+				VALUES ('" .$id. "','" .$term."','".$document_frequently."')
 				ON DUPLICATE KEY UPDATE 
 				`term`='".$term."', `document_frequently`=`document_frequently`+".$document_frequently.", 
 				`term_id` = LAST_INSERT_ID(`term_id`)";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
         $termID = mysqli_insert_id($conn);
 
-        return $termID;
+        return $id;
     }
 
     function ProcessRelevance($relevence_docs, $ngram_relevence_docs){
-
         $MaxDifference = self::getMaxDifference($relevence_docs);
 
         $MaxRelevanceValue = self::getMaxRelevancealue($ngram_relevence_docs);

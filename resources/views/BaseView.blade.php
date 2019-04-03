@@ -97,7 +97,7 @@ desired effect
                 {{--<li><a href="/xpath_search_engine/"><i class="fa fa-circle-o text-yellow"></i> <span>xpath search engine</span></a></li>--}}
                 <li><a href="/Term/browse/"><i class="fa fa-circle-o text-red"></i> <span>View Term</span></a></li>
                 <li><a href="/Document/browse/"><i class="fa fa-circle-o text-red"></i> <span>View Documents</span></a></li>
-                {{--<li><a href="/FileManager/resetIndex/"><i class="fa fa-circle-o text-yellow"></i> <span>Reset Documents</span></a></li>--}}
+                <li><a href="/FileManager/resetIndex/"><i class="fa fa-circle-o text-yellow"></i> <span>Reset Documents</span></a></li>
                 {{--<li><a href="/similarity/browse/"php><i class="fa fa-circle-o text-aqua"></i> <span>Find Similarity</span></a></li>--}}
                 <form method="post" action="{{route('uploadeFile')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
