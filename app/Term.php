@@ -47,21 +47,37 @@ class Term extends Model {
 
     function insert_conn($term, $document_frequently, $conn){
 
-        $sql = "SELECT max(term_id) as 'N' FROM `terms`";
-        $result = mysqli_query($conn, $sql) or die(mysqli_error(self::$conn));
-        $id = mysqli_fetch_assoc($result)['N'] + 1;
-        if($id == null){
-            $id = 0;
+
+
+        $data = DB::table('terms')
+            ->where('terms.term', $term)
+            ->get();
+        if(isset($data[0])){ // duplicated
+            $id = $data[0]->term_id;
+            $document_frequently++;
+            //var_dump($data[0]);
+            //var_dump($data[0]->term_id);
+            $sql = "update `terms`
+				SET `term_id` = '" .$id. "', `term` = '" .$term."', `document_frequently` = '".$document_frequently."'
+				where `term` = '" .$term."'";
+            $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+            $termID = mysqli_insert_id($conn);
+        }else{
+            $sql = "SELECT max(term_id) as 'N' FROM `terms`";
+            $result = mysqli_query($conn, $sql) or die(mysqli_error(self::$conn));
+            $id = mysqli_fetch_assoc($result)['N'] + 1;
+            if($id == null){
+                $id = 0;
+            }
+
+            $sql = "INSERT INTO `terms`
+				(`term_id`, `term`, `document_frequently`) 
+				VALUES ('" .$id. "','" .$term."','".$document_frequently."')";
+            $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+            $termID = mysqli_insert_id($conn);
         }
 
-        $sql = "INSERT INTO `terms`
-				(`term_id`, `term`, `document_frequently`) 
-				VALUES ('" .$id. "','" .$term."','".$document_frequently."')
-				ON DUPLICATE KEY UPDATE 
-				`term`='".$term."', `document_frequently`=`document_frequently`+".$document_frequently.", 
-				`term_id` = LAST_INSERT_ID(`term_id`)";
-        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-        $termID = mysqli_insert_id($conn);
+
 
         return $id;
     }
