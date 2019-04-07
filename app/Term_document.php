@@ -8,7 +8,7 @@ use DB;
 
 class Term_document extends Model {
 
-    public static $tableName = 'term_document';
+    public static $tableName = 'term_documents';
     public static $tb_term_id = 'term_id';
     public static $tb_document_id = 'document_id';
     public static $tb_term_frequently = 'term_frequently';
@@ -23,7 +23,7 @@ class Term_document extends Model {
 
     function insert_conn($sqlStatement, $conn){
 
-        $sql2 = "INSERT INTO `term_document`
+        $sql2 = "INSERT INTO `term_documents`
 			(`term_id`, `document_id`, `term_frequently`, `locations`) 
 			VALUES ";
 

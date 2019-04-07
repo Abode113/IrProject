@@ -21,9 +21,9 @@ class xpath extends Model {
 
         $sql = "SELECT `term`, `document_frequently`, 
 					   `documents`.`document_id`, `term_frequently`, `terms_count`
-				FROM `terms`, `documents`, `term_document`
-				WHERE `terms`.`term_id` = `term_document`.`term_id` 
-				AND `documents`.`document_id` = `term_document`.`document_id`
+				FROM `terms`, `documents`, `term_documents`
+				WHERE `terms`.`term_id` = `term_documents`.`term_id` 
+				AND `documents`.`document_id` = `term_documents`.`document_id`
 				AND (`term` = '".preg_replace('/\s+/', "' OR `term` = '", $query)."') ";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
         $data = array();

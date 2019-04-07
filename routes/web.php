@@ -35,11 +35,15 @@ Route::post('/searchEngine/xpathsearch', 'xpathSearchController@search')->name('
 Route::post('/searchEngine/search', 'searchController@search')->name('search');
 //Route::post('/searchEngine/test', 'searchController@test')->name('test');
 Route::post('/FileManager/uploade', 'FileManagerController@uploade')->name('uploadeFile');
+Route::post('/FileManager/BackUp', 'FileManagerController@BackUpCorpus')->name('BackUpCorpus');
 Route::post('/FileManager/deleteDocument/{id}', 'FileManagerController@deleteDocument')->name('deleteDocument');
 Route::post('/Documents/browse/{term_id}', 'viewDocumentController@BrowseDocumentByTremID')->name('TermDocs');
 Route::post('/Term/browse/{doc_id}', 'TermConroller@BrowseTermsByDocumentID')->name('DocTerms');
+Route::post('/Corpus/ApplyingBackUp/{corpus_is}', 'FileManagerController@ApplyBackUp')->name('ApplyBackUp');
+Route::post('/Corpus/deleteBackUp/{corpus_is}', 'FileManagerController@deleteCorpusById')->name('deleteBackUp');
 Route::get('/FileManager/resetIndex/', 'FileManagerController@resetIndex')->name('resetIndex');
 Route::get('/Document/browse', 'viewDocumentController@browse')->name('browseDocument');
+Route::get('/Corpus/browse', 'FileManagerController@getCorpus')->name('getCorpus');
 Route::get('/Term/browse/', 'TermConroller@browse')->name('browseTerm');
 Route::get('/similarity/browse', 'similarityController@browse')->name('browsesimilarity');
 

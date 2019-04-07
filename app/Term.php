@@ -24,8 +24,8 @@ class Term extends Model {
     function getAllTerms(){
 
         $Data = DB::table(self::$tableName)
-            ->join('term_document', 'term_document.term_id', '=', self::$tableName . '.' . self::$tb_term_id)
-            ->join(Document::$tableName, Document::$tableName . '.' . Document::$tb_id, '=', 'term_document.document_id')
+            ->join('term_documents', 'term_documents.term_id', '=', self::$tableName . '.' . self::$tb_term_id)
+            ->join(Document::$tableName, Document::$tableName . '.' . Document::$tb_id, '=', 'term_documents.document_id')
             ->select(self::$tableName . '.' . self::$tb_term_id,
                     self::$tableName . '.' . self::$tb_term,
                     self::$tableName .  '.' . self::$tb_document_frequently)
@@ -223,9 +223,9 @@ class Term extends Model {
 
     function Get_nGram_relevance($arr, $relevence_docs){
 
-        $ngram_data = DB::table('term_document')
-            ->join('terms', 'terms.term_id', '=', 'term_document.term_id')
-            ->join('documents', 'documents.document_id', '=', 'term_document.document_id')
+        $ngram_data = DB::table('term_documents')
+            ->join('terms', 'terms.term_id', '=', 'term_documents.term_id')
+            ->join('documents', 'documents.document_id', '=', 'term_documents.document_id')
             ->select('term', 'document_frequently', 'documents.document_id', 'term_frequently', 'terms_count')
             ->Where(function ($query) use($arr) {
                 for ($i = 0; $i < count($arr); $i++){

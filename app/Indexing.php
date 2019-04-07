@@ -194,9 +194,9 @@ class Indexing extends Model {
         $term = new Term();
         //var_dump($query);exit();
         //$QueryWords = preg_split('/\s+/', $query);
-        $data = DB::table('term_document')
-            ->join('terms', 'terms.term_id', '=', 'term_document.term_id')
-            ->join('documents', 'documents.document_id', '=', 'term_document.document_id')
+        $data = DB::table('term_documents')
+            ->join('terms', 'terms.term_id', '=', 'term_documents.term_id')
+            ->join('documents', 'documents.document_id', '=', 'term_documents.document_id')
             ->select('term', 'document_frequently', 'documents.document_id', 'term_frequently', 'terms_count')
             ->whereIn('term', $query)
             ->get();
@@ -385,8 +385,8 @@ class Indexing extends Model {
 					
 					# sql for having the terms together in the same document
 					$sql = "SELECT COUNT(*) AS `c`, `document_id`
-							FROM `terms`, `term_document`
-							WHERE `terms`.`term_id` = `term_document`.`term_id` AND
+							FROM `terms`, `term_documents`
+							WHERE `terms`.`term_id` = `term_documents`.`term_id` AND
 							(`term` = '".preg_replace('/\s+/', "' OR `term` = '", $terms)."')
 							GROUP BY `document_id`
 							HAVING `c`= ".str_word_count($terms);
@@ -422,8 +422,8 @@ class Indexing extends Model {
 						# foreach and not query for all , to maintain the sequence of terms of the meaning
 						foreach($phrase_query as $term){
 							$sql = "SELECT `term`, `document_frequently`, `document_id`, `term_frequently`, `locations`
-								FROM `terms`, `term_document`
-								WHERE `terms`.`term_id` = `term_document`.`term_id` AND
+								FROM `terms`, `term_documents`
+								WHERE `terms`.`term_id` = `term_documents`.`term_id` AND
 								`term` = '".$term."' AND
 								(`document_id` = " . implode(' OR `document_id` = ',$data ) . ")
 								ORDER BY `document_id`";
@@ -485,9 +485,9 @@ class Indexing extends Model {
 			//echo " THE ONE WORD IS :".$terms;
 			$sql = "SELECT  `documents`.`terms_count` , `t`.`tf`, `t`.`document_id`
 					FROM `documents` INNER JOIN 
-					(SELECT SUM(`term_frequently`) as `tf`, `term_document`.`document_id`
-					FROM `terms`, `term_document` 
-					WHERE `terms`.`term_id` = `term_document`.`term_id` AND  
+					(SELECT SUM(`term_frequently`) as `tf`, `term_documents`.`document_id`
+					FROM `terms`, `term_documents` 
+					WHERE `terms`.`term_id` = `term_documents`.`term_id` AND  
 					(`term` = '".implode("' OR `term` = '", $meaning)."')
 					GROUP BY `document_id`) AS `t` 
 					ON `documents`.`document_id` = `t`.`document_id`";
@@ -581,7 +581,7 @@ class Indexing extends Model {
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		
 		# 2. get terms in it .
-		$sql = "SELECT `term_id` FROM `term_document` 
+		$sql = "SELECT `term_id` FROM `term_documents` 
 				WHERE `document_id` = ".$id;
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		if (mysqli_num_rows($result) == 0){
@@ -594,7 +594,7 @@ class Indexing extends Model {
 		}
 		
 		# 3. delete tf for all terms in that doc .
-		$sql = "DELETE FROM `term_document`
+		$sql = "DELETE FROM `term_documents`
 				WHERE `document_id` = ".$id;
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		
@@ -617,7 +617,7 @@ class Indexing extends Model {
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		$sql = "TRUNCATE TABLE `terms`";
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
-		$sql = "TRUNCATE TABLE `term_document`";
+		$sql = "TRUNCATE TABLE `term_documents`";
 		$result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
 		// delete all files from documents directory
 		array_map('unlink', glob('documents/' . '*.txt'));

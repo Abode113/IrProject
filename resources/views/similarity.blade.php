@@ -20,11 +20,11 @@
     if(isset($_POST['doc1'])){
 
         function tf_idf_length($conn, $doc, $total_documents){
-            $sql = "SELECT `terms`.`term_id`, `term_frequently`, `term_document`.`document_id`,
+            $sql = "SELECT `terms`.`term_id`, `term_frequently`, `term_documents`.`document_id`,
 						`document_frequently`
-						FROM `term_document`,`terms`
-						WHERE `term_document`.`document_id` = ".(int)$doc." AND
-						`term_document`.`term_id` = `terms`.`term_id`";
+						FROM `term_documents`,`terms`
+						WHERE `term_documents`.`document_id` = ".(int)$doc." AND
+						`term_documents`.`term_id` = `terms`.`term_id`";
             $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
             while( $row = mysqli_fetch_assoc($result) ){
                 $data[] = $row;

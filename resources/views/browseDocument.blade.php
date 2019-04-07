@@ -9,6 +9,10 @@ $documents = $Data['Content'];
     <br/>
     <a href="/" class="btn btn-primary">Home
     </a>
+    <form method="post" action="{{route('BackUpCorpus')}}" enctype="multipart/form-data">
+        {{ csrf_field() }}
+        <button type="submit" class="btn btn-success">Back Up Corpus</button>
+    </form>
     <h3 style="font-weight: 300;">Current Documents :</h3><br/>
     <div class="table-responsive">
         <table id="users_table" class="table table-striped table-bordered">
