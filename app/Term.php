@@ -83,6 +83,7 @@ class Term extends Model {
     }
 
     function ProcessRelevance($relevence_docs, $ngram_relevence_docs){
+
         $MaxDifference = self::getMaxDifference($relevence_docs);
 
         $MaxRelevanceValue = self::getMaxRelevancealue($ngram_relevence_docs);
@@ -214,11 +215,12 @@ class Term extends Model {
     }
 
     function unseen($arr, $tokens){
+
         $new_arr = array();
         foreach ($tokens as $elem){
             array_push($new_arr, $elem->term);
         }
-        return array_diff($arr, $new_arr);
+        return array_values(array_udiff($arr, $new_arr, 'strcasecmp'));
     }
 
     function Get_nGram_relevance($arr, $relevence_docs){
@@ -236,14 +238,22 @@ class Term extends Model {
         $ngram_relevence_docs = array();
 
         $MaxLen = self::getMaxNgramLength($ngram_data);
+        $count = 0;
         foreach($ngram_data as $doc_item){
-
+            $entered = false;
+            if($count >= 10){
+                break;
+            }
             if(!isset($ngram_relevence_docs[$doc_item->document_id])){
                 $ngram_relevence_docs[$doc_item->document_id]['document_id'] = $doc_item->document_id;
                 $ngram_relevence_docs[$doc_item->document_id]['relevance_val'] = 0;
                 $ngram_relevence_docs[$doc_item->document_id]['token'] = [];
             }
+            $matc_count = 0;
             foreach ($arr as $elem){
+                if($matc_count >= 5){
+                    break;
+                }$matc_count++;
                 $editeDistance = levenshtein($elem, $doc_item->term);
                 $elem_length = strlen($elem);
                 $term_length = strlen($doc_item->term);
@@ -254,7 +264,8 @@ class Term extends Model {
 
                 $relevance_val = $MaxLen - $editeDistance;
 
-                if($relevance_val > 1) {
+                if($relevance_val > 10) {
+                    $entered = true;
                     $ngram_relevence_docs[$doc_item->document_id]['relevance_val'] += $relevance_val;
                     if(isset($ngram_relevence_docs[$doc_item->document_id]['token'][$doc_item->term])){
                         array_push(
@@ -267,6 +278,9 @@ class Term extends Model {
                             [$elem, $relevance_val]);
                     }
                 }
+            }
+            if($entered){
+                $count++;
             }
         }
         return self::ProcessRelevance($relevence_docs, $ngram_relevence_docs);

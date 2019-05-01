@@ -20,11 +20,11 @@
                            style="position: absolute; left: -9999px; width: 1px; height: 1px;"
                            tabindex="-1" />
                 </div>
-                {{--<div class="input-group">--}}
-                    {{--<div class="checkbox">--}}
-                        {{--<label style="font-size:large"><input id="s" name="s" type="checkbox" value="1"> Semantic ?</label>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+                <div class="input-group">
+                    <div class="checkbox">
+                        <label style="font-size:large"><input id="s" name="s" type="checkbox" value="1"> Semantic ?</label>
+                    </div>
+                </div>
             </form>
 
         </div>

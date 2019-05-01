@@ -189,7 +189,8 @@ class Indexing extends Model {
         return $newArr;
     }
 
-    public static function submit_query($queryStatment, $orginalQuery, $query, $Ngram_arr){
+    public static function submit_query($queryStatment, $orginalQuery, $query, $expanded_query){
+
         $document = new Document();
         $term = new Term();
         //var_dump($query);exit();
@@ -202,6 +203,22 @@ class Indexing extends Model {
             ->get();
 
         $unseen = $term->unseen($orginalQuery, $data);
+
+        // applying Ngram
+        $langDetector = new LangDetector();
+        $Ngram_arr = array();
+        $Ngram = array();
+        $soundex = new Soundex();
+        foreach ($unseen as $index => $item){
+            array_push($Ngram, $langDetector->getNgrams($item));
+            array_push($Ngram[$index], $soundex->getsoundex($item));
+        }
+        foreach ($Ngram as $index => $item){
+            foreach ($item as $index => $elem){
+                array_push($Ngram_arr, $elem);
+            }
+        }
+        // ------------
 
         $total_documents = DB::table('documents')->count();
 		//echo $total_documents;
@@ -239,6 +256,7 @@ class Indexing extends Model {
                 $ngram_relevence_docs = $term->Get_nGram_relevance($Ngram_arr, $relevence_docs);
 
                 $unseen_docs = $term->Get_nGram_relevance(array_values($unseen), $relevence_docs);
+
                 if($unseen) {
                     $mostPropWords = $term->GetMostPropableWordUnseen($queryStatment, array_values($unseen), $unseen_docs);
                 }
@@ -252,6 +270,45 @@ class Indexing extends Model {
             $relevence_docs = $term->array_merge_relvance($relevence_docs, $ngram_relevence_docs);
         }
 
+        //------------------------------------------------------
+        if($expanded_query != null){
+            $data = DB::table('term_documents')
+                ->join('terms', 'terms.term_id', '=', 'term_documents.term_id')
+                ->join('documents', 'documents.document_id', '=', 'term_documents.document_id')
+                ->select('term', 'document_frequently', 'documents.document_id', 'term_frequently', 'terms_count')
+                ->whereIn('term', $expanded_query)
+                ->get();
+
+            $expanded_relevence_docs = array();
+            foreach($data as $doc_item){
+                $relevance_val = ($doc_item->term_frequently*5000/$doc_item->terms_count) *
+                    (log($total_documents / $doc_item->document_frequently) + 1);
+
+
+                if(!isset($expanded_relevence_docs[$doc_item->document_id])){
+                    $expanded_relevence_docs[$doc_item->document_id]['document_id'] = $doc_item->document_id;
+                    $expanded_relevence_docs[$doc_item->document_id]['relevance_val'] = 0;
+                    $expanded_relevence_docs[$doc_item->document_id]['token'] = [];
+                }
+
+                $expanded_relevence_docs[$doc_item->document_id]['relevance_val'] += $relevance_val;
+                if(isset($expanded_relevence_docs[$doc_item->document_id]['token'][$doc_item->term])){
+                    array_push(
+                        $expanded_relevence_docs[$doc_item->document_id]['token'][$doc_item->term],
+                        [$doc_item->term, $relevance_val]);
+                }else{
+                    $expanded_relevence_docs[$doc_item->document_id]['token'][$doc_item->term] = array();
+                    array_push(
+                        $expanded_relevence_docs[$doc_item->document_id]['token'][$doc_item->term],
+                        [$doc_item->term, $relevance_val]);
+                }
+            }
+
+
+            $relevence_docs = self::mergeNormalWithSemantic($relevence_docs, $expanded_relevence_docs);
+        }
+        //------------------------------------------------------
+
         $relevence_docs = $document->AddDocmentData($relevence_docs);
 
         usort($relevence_docs, function($a, $b) { // anonymous function
@@ -261,6 +318,7 @@ class Indexing extends Model {
             return ($a['relevance_val'] > $b['relevance_val']) ? -1 : 1;
         });
 
+        $relevence_docs = array_slice($relevence_docs,0, 30);
         $result = [$relevence_docs, $mostPropWords];
 		return $result;
 	}
@@ -299,6 +357,149 @@ class Indexing extends Model {
 
         // return the word
         return $stemmed_word;
+    }
+
+    public function get_synonim ($tag){
+//        $raw_synonims1 = 'Sense 1
+//administration, disposal
+//       => management, direction';
+//        $matches1 = array ();
+//        preg_match_all ("/\s+(.+)\s+=>/",
+//            $raw_synonims1, $matches1, PREG_PATTERN_ORDER);
+//        var_dump($raw_synonims1);
+//        var_dump($matches1);
+//
+//        $raw_synonims1 = 'Sense 1
+//Kennedy, Jack Kennedy, John Fitzgerald Kennedy, JFK, President Kennedy, President John F. Kennedy
+//       INSTANCE OF=> President of the United States, United States President, President, Chief Executive';
+//        $matches1 = array ();
+//        preg_match_all ("/\s+(.+)\s+=>/",
+//            $raw_synonims1, $matches1, PREG_PATTERN_ORDER);
+//        var_dump($raw_synonims1);
+//        var_dump($matches1);
+//        exit();
+
+
+        // cmd commend
+        $wn_command = '"C:/Program Files (x86)/WordNet/2.1/bin/wn" "'.$tag.'" "-synsn"';
+        $raw_synonims = shell_exec ($wn_command);
+
+        // if the word exist
+        if (! $raw_synonims) {
+            return null;
+        }
+
+        // get the result of cmmend
+        $matches = array ();
+        preg_match_all ("/\s+(.+)\s+.+?=>/",
+            $raw_synonims, $matches, PREG_PATTERN_ORDER);
+//        var_dump($raw_synonims);
+
+        // if no matched result
+        if(!isset($matches[1][0])){
+            return null;
+        }
+
+//        dd($matches);
+        // get all accepted words
+        $expanded_query = array();
+
+        foreach ($matches[1] as $match){
+            $match = explode (", ", $match);
+            foreach ($match as $word){
+                array_push($expanded_query, strtolower($word));
+            }
+        }
+
+        // remove repeated element
+        $expanded_query = array_unique($expanded_query);
+
+        // return the word
+        return $expanded_query;
+    }
+
+    public function get_hypernyms ($tag){
+//        $raw_synonims1 = 'Sense 1
+//Kennedy, Jack Kennedy, John Fitzgerald Kennedy, JFK, President Kennedy, President John F. Kennedy
+//       INSTANCE OF=> President of the United States, United States President, President, Chief Executive
+//           => head of state, chief of state
+//               => representative
+//                   => negotiator, negotiant, treater
+//                       => communicator
+//                           => person, individual, someone, somebody, mortal, soul
+//                               => organism, being
+//                                   => living thing, animate thing
+//                                       => object, physical object
+//                                           => physical entity
+//                                               => entity
+//                               => causal agent, cause, causal agency
+//                                   => physical entity
+//                                       => entity
+//
+//Sense 2
+//Kennedy, Kennedy Interrnational, Kennedy International Airport
+//       INSTANCE OF=> airport, airdrome, aerodrome, drome
+//           => airfield, landing field, flying field, field
+//               => facility, installation
+//                   => artifact, artefact
+//                       => whole, unit
+//                           => object, physical object
+//                               => physical entity
+//                                   => entity';
+//        $matches1 = array ();
+//        preg_match_all ("/\s+(.+)\s+=>/",
+//            $raw_synonims1, $matches1, PREG_PATTERN_ORDER);
+//        var_dump($raw_synonims1);
+//        var_dump($matches1);
+//
+//        $raw_synonims1 = 'Sense 1
+//Kennedy, Jack Kennedy, John Fitzgerald Kennedy, JFK, President Kennedy, President John F. Kennedy
+//       INSTANCE OF=> President of the United States, United States President, President, Chief Executive';
+//        $matches1 = array ();
+//        preg_match_all ("/\s+(.+)\s+=>/",
+//            $raw_synonims1, $matches1, PREG_PATTERN_ORDER);
+//        var_dump($raw_synonims1);
+//        var_dump($matches1);
+//        exit();
+        ini_set("xdebug.var_display_max_children", -1);
+        ini_set("xdebug.var_display_max_data", -1);
+        ini_set("xdebug.var_display_max_depth", -1);
+
+        // cmd commend
+        $wn_command = '"C:/Program Files (x86)/WordNet/2.1/bin/wn" "'.$tag.'" "-hypen"';
+        $raw_synonims = shell_exec ($wn_command);
+
+        // if the word exist
+        if (! $raw_synonims) {
+            return null;
+        }
+
+        // get the result of cmmend
+        $matches = array ();
+        preg_match_all ("/\s+(.+)\s+.+?=>/",
+            $raw_synonims, $matches, PREG_PATTERN_ORDER);
+
+        // if no matched result
+        if(!isset($matches[1][0])){
+            return null;
+        }
+
+//        dd($matches);
+        // get all accepted words
+        $expanded_query = array();
+
+        foreach ($matches[1] as $match){
+            $match = explode (", ", $match);
+            foreach ($match as $word){
+                array_push($expanded_query, strtolower($word));
+            }
+        }
+
+        // remove repeated element
+        $expanded_query = array_unique($expanded_query);
+
+        // return the word
+        return $expanded_query;
     }
 
     public static function most_frequent_Word($arr){
@@ -622,6 +823,51 @@ class Indexing extends Model {
 		// delete all files from documents directory
 		array_map('unlink', glob('documents/' . '*.txt'));
 	}
+
+	public static function relevanceByDoc($arr, $doc_id){
+	    foreach ($arr as $elem){
+	        if($elem['document_id'] == $doc_id){
+	            return $elem['relevance_val'];
+            }
+        }
+        return 0;
+    }
+
+    public static function notexisteDoc($arr1, $arr2){
+        $arr1_id = array();
+        $arr2_id = array();
+	    foreach ($arr1 as $elem){
+            array_push($arr1_id, $elem['document_id']);
+        }
+        foreach ($arr2 as $elem){
+            array_push($arr2_id, $elem['document_id']);
+        }
+        $result=array_diff($arr2_id, $arr1_id);
+        return $result;
+    }
+
+    public static function ObjByDocId($arr, $doc_id){
+        foreach ($arr as $elem){
+            if($elem['document_id'] == $doc_id){
+                return $elem;
+            }
+        }
+        return null;
+    }
+
+    public static function mergeNormalWithSemantic($normal, $semantic){
+
+	    foreach ($normal as $index => $elem){
+            $normal[$index]['relevance_val'] += self::relevanceByDoc($semantic, $elem['document_id']);
+        }
+
+        $diff = self::notexisteDoc($normal, $semantic);
+        foreach ($diff as $elem){
+            array_push($normal, self::ObjByDocId($semantic, $elem));
+        }
+
+        return $normal;
+    }
 }
 
 

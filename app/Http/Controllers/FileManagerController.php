@@ -70,7 +70,7 @@ class FileManagerController extends Controller
     }
 
     public function BackUpCorpus(Request $request){
-        ini_set('max_execution_time', 1200);
+        ini_set('max_execution_time', 1500);
         try {
             DB::transaction(function() use($request) {
                 //dd('hey hey hey');
@@ -87,17 +87,20 @@ class FileManagerController extends Controller
                 // ------------------------------------------------
                 $corpus_id = array();
                 $test_term_max_corpus_id = DB::table($test_term::$tableName)
-                    ->max($test_term::$corpus_id);
-                array_push($corpus_id, $test_term_max_corpus_id);
-                $Allterm_max_corpus_id = DB::table($test_term_document::$tableName)
-                    ->max($test_term_document::$corpus_id);
-                array_push($corpus_id, $Allterm_max_corpus_id);
-                $Allterm_max_corpus_id = DB::table($test_documents::$tableName)
-                    ->max($test_documents::$corpus_id);
-                array_push($corpus_id, $Allterm_max_corpus_id);
+                    ->select($test_term::$tableName . '.corpus_id')->distinct()->get();
+                foreach ($test_term_max_corpus_id as $elem){
+                    array_push($corpus_id, $elem->corpus_id);
+                }
+//                dd($corpus_id);
+//                $Allterm_max_corpus_id = DB::table($test_term_document::$tableName)
+//                    ->max($test_term_document::$corpus_id);
+//                array_push($corpus_id, $Allterm_max_corpus_id);
+//                $Allterm_max_corpus_id = DB::table($test_documents::$tableName)
+//                    ->max($test_documents::$corpus_id);
+//                array_push($corpus_id, $Allterm_max_corpus_id);
 
                 $corpus_num = self::GetRightCorpus($corpus_id);
-
+//dd($corpus_num);
 
 
                 // ------------------------------------------------
@@ -153,8 +156,9 @@ class FileManagerController extends Controller
 
                     $test_term_document_obj->save();
                 }
+                //dd('hey hey');
                 // ------------------------------------------------
-                self::getCorpus();
+                //self::getCorpus();
 
             });
 
@@ -164,6 +168,8 @@ class FileManagerController extends Controller
             var_dump('hey');
             dd($exc->getMessage());
         }
+        self::getCorpus();
+        //dd('hey hhh hey');
     }
 
     public function getCorpus(){
@@ -287,6 +293,7 @@ class FileManagerController extends Controller
     }
 
     function GetRightCorpus($corpus_id){
+//        dd($corpus_id);
         sort($corpus_id);
         $count = count($corpus_id);
         for ($i = 0; $i < $count - 1; $i++){
