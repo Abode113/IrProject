@@ -45,7 +45,8 @@ Route::get('/FileManager/resetIndex/', 'FileManagerController@resetIndex')->name
 Route::get('/Document/browse', 'viewDocumentController@browse')->name('browseDocument');
 Route::get('/Corpus/browse', 'FileManagerController@getCorpus')->name('getCorpus');
 Route::get('/Term/browse/', 'TermConroller@browse')->name('browseTerm');
-Route::get('/similarity/browse', 'similarityController@browse')->name('browsesimilarity');
+//Route::get('/similarity/browse', 'similarityController@browse')->name('browsesimilarity');
+Route::post('/similarity/findsimilartiy/{document_id}', 'similarityController@findSimilartiy')->name('findsimilartiy');
 
 
 

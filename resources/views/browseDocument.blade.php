@@ -20,6 +20,8 @@ $documents = $Data['Content'];
             <tr>
                 <th>Id</th>
                 <th>Title</th>
+                <th>FindSimilarity</th>
+                <th>Terms</th>
                 <th>Delete?</th>
             </tr>
             </thead>
@@ -29,6 +31,12 @@ $documents = $Data['Content'];
                     <tr>
                         <td><?=$row['document_id']?></td>
                         <td><a href="{{ url('documents\\' . $row['document_title']) }}"><?=$row['document_title']?></a></td>
+                        <td>
+                            <form method="post" action="{{route('findsimilartiy', $row['document_id'])}}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-success">Find</button>
+                            </form>
+                        </td>
                         <td>
                             <form method="post" action="{{route('DocTerms', $row['document_id'])}}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
