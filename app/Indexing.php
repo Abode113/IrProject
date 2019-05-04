@@ -768,6 +768,48 @@ class Indexing extends Model {
 		}
 		return $data;
 	}
+
+    public static function getNeededDocuments($unNeededDocs){
+	    if($unNeededDocs != null) {
+            $sql = "SELECT `document_id`,`document_title` FROM `documents` WHERE `document_id` NOT IN (";
+            foreach ($unNeededDocs as $elem) {
+                $sql .= (string)$elem . ",";
+            }
+            $sql = rtrim($sql, ',');
+            $sql .= ")";
+
+        }else {
+            $sql = "SELECT `document_id`,`document_title` FROM `documents`";
+        }
+        $result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
+        $data = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+
+    public static function getUnNeededDocuments($unNeededDocs){
+	    if($unNeededDocs != null) {
+            $sql = "SELECT `document_id`,`document_title` FROM `documents` WHERE `document_id` IN (";
+            foreach ($unNeededDocs as $elem) {
+                $sql .= (string)$elem . ",";
+            }
+            $sql = rtrim($sql, ',');
+            $sql .= ")";
+
+            $result = mysqli_query(self::$conn, $sql) or die(mysqli_error(self::$conn));
+            $data = array();
+            while( $row = mysqli_fetch_assoc($result) ){
+                $data[] = $row;
+            }
+            return $data;
+        }else{
+            return null;
+        }
+
+    }
+
 	
 	public static function deleteDocument($id){
 		

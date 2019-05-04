@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
+use App\docsimilarity;
+use App\Indexing;
 use Session;
 use DB;
 
@@ -12,109 +16,170 @@ class similarityController extends Controller
 
     }
 
-    public function browse($doc_id, $arr_ofSimilarity){
+    public function browse(){
 
-        //dd($doc_id);
-        return view('similarity');
-    }
+        $Data = DB::table('docsimilarities')
+            ->select('doc_left_id')
+            ->distinct()->get();
 
-    public function findSimilartiy(Request $request, $document_id){
-        $doc_id = (int)$document_id;
+        $unneededDoc = array();
 
-        $conn = mysqli_connect('localhost', 'root', '', 'search_engine');
-        if( mysqli_connect_errno() ){
-            throw new exception('Could not connect to DB');
+        foreach ($Data as $elem){
+            array_push($unneededDoc, $elem->doc_left_id);
         }
 
-        $sql = "SELECT COUNT(*) as 'N' FROM `documents`";
-        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-        $total_documents = mysqli_fetch_assoc($result)['N'];
-
-        $tf_idf = self::tf_idf_length($conn, $doc_id, $total_documents);
-
-        //echo "<pre>"; print_r($tf_idf); echo "</pre>";
-
-        $sql = "SELECT `document_id` FROM `documents` WHERE `document_id` != ".$doc_id;
-        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
-        $tf_idf_rest = array();
-        while( $row = mysqli_fetch_assoc($result) ){
-            $tf_idf_rest[$row['document_id']] = self::tf_idf_length($conn, $row['document_id'], $total_documents) ;
-        }
-
-        $sim = self::find_similarity($tf_idf,$tf_idf_rest);
-        arsort($sim);
-
-
-        $data = DB::table('documents')
-            ->select('document_title')
-            ->where('document_id', $doc_id)
-            ->get();
-        $FinalData = [$data[0]->document_title, array()];
-
-        foreach ($sim as $index => $elem){
-
-            $data = DB::table('documents')
-                ->select('document_title')
-                ->where('document_id', $index)
-                ->get();
-            array_push($FinalData[1], [$data[0]->document_title, $elem]);
-        }
+        $indexing = new Indexing();
+        $documents = $indexing->getNeededDocuments($unneededDoc);
 
         $Data = [
-            'Content' => ['Data' => $FinalData]
+            'Content' => $documents
+            ,'add' => true
         ];
 
-        return view('similarity', compact('Data'));
-        //self::browse($doc_id, $sim);
-
+        return view('similarityList', compact('Data'));
     }
 
-    public function tf_idf_length($conn, $doc, $total_documents){
-        $sql = "SELECT `terms`.`term_id`, `term_frequently`, `term_documents`.`document_id`,
-						`document_frequently`
-						FROM `term_documents`,`terms`
-						WHERE `term_documents`.`document_id` = ".(int)$doc." AND
-						`term_documents`.`term_id` = `terms`.`term_id`";
-        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-        while( $row = mysqli_fetch_assoc($result) ){
-            $data[] = $row;
+    public function browseexist(){
+
+        $Data = DB::table('docsimilarities')
+            ->select('doc_left_id')
+            ->distinct()->get();
+
+        $unneededDoc = array();
+
+        foreach ($Data as $elem){
+            array_push($unneededDoc, $elem->doc_left_id);
         }
-        /*echo "<pre>";
-        print_r($data);
-        echo "</pre>";*/
-        $tf_idf = array();
-        foreach($data as $term){
-            $tf_idf[$term['term_id']] =
-                ($term['term_frequently']) * log($total_documents / $term['document_frequently'], 2);
+
+        $indexing = new Indexing();
+        $documents = $indexing->getUnNeededDocuments($unneededDoc);
+
+        $Data = [
+            'Content' => $documents
+            ,'add' => false
+        ];
+
+        return view('similarityList', compact('Data'));
+
+    }
+
+    public function deleteSimilarity(Request $request){
+        $DocList = $request['DocList'];
+
+        $data = DB::table('docsimilarities')->whereIn('doc_left_id', $DocList)->get();
+
+        $indexing = new Indexing();
+        $arr = array();
+        $documents = $indexing->getUnNeededDocuments($arr);
+        $Data = [
+            'Content' => $documents
+            ,'add' => false
+        ];
+
+        return view('similarityList', compact('Data'));
+
+    }
+
+    public function findSimilartiy($document_id, $view = true){
+
+        $_docsimilarity = new docsimilarity();
+
+        $FinalData = $_docsimilarity->findSimilartiy((int)$document_id);
+
+        if($view){
+            $Data = [
+                'Content' => ['Data' => $FinalData]
+            ];
+
+            return view('similarity', compact('Data'));
+        }else{
+            return $FinalData;
         }
-        //$sum = array_sum($tf_idf);
-        //$tf_idf['-1'] = $sum;
-        return $tf_idf;
-
     }
 
-    public function square($n)
-    {
-        return($n * $n);
-    }
 
-    public function find_similarity($tf_idf,$tf_idf_rest){
-        $sim = array();
-        //dd(array_sum(array_map('self::square', $tf_idf)));
-        $doc_base = array_sum(array_map('self::square', $tf_idf));
-        foreach($tf_idf_rest as $i => $tf_idf_single_other){
-            $a = array();
-            foreach($tf_idf as $key => $value){
-                if(array_key_exists($key, $tf_idf_single_other))
-                    $a[$key] = $tf_idf_single_other[$key] * $value;
+
+    public function findsimilartiyForDoc($doc_id, $last_arr){
+
+        $_docsimilarity = new docsimilarity();
+        $FinalData = $_docsimilarity->findSimilartiy($doc_id);
+        $arr = array();
+        foreach ($FinalData[1] as $elem){
+            $_docsimilarity_obj = new docsimilarity();
+            $obj = array();
+//            if(count($last_arr) > 300){
+//                dd($last_arr);
+//            }
+            if(self::AddOrNot($FinalData[0][0], $elem[2], $last_arr)){
+                $obj = [
+                    'doc_left_id' => $FinalData[0][0],
+                    'doc_id_right' => $elem[2],
+                    'Similarity_value' => $elem[1],
+                    'updated_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
+                ];
+                array_push($arr, $obj);
+            }else {
+                var_dump($FinalData[0][0] . ' with ' . $elem[2]);
             }
-            $sum = array_sum($a);
-            $other_doc_base = array_sum(array_map('self::square', $tf_idf_single_other));
-            $base = sqrt($doc_base * $other_doc_base);
-            $sim[$i] = $sum/$base;
+            //$_docsimilarity_obj->add($FinalData[0][0], $elem[2], $elem[1]);
         }
-        return $sim;
+        return $arr;
+    }
+
+    public function AddOrNot($id_left, $id_right, $arr){
+        foreach ($arr as $elem){
+            if($elem['doc_left_id'] == $id_left){
+                if($elem['doc_id_right'] == $id_right){
+                    return false;
+                }
+            }else if ($elem['doc_id_right'] == $id_left){
+                if($elem['doc_left_id'] == $id_right){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public function findsimilartiyAllDoc(Request $request){
+
+        $DocList = $request['DocList'];
+        ini_set('max_execution_time', 15000);
+        try {
+        DB::transaction(function() use($DocList) {
+
+
+            $arr = self::getdocsimilaritiesData();
+            $new_arr = array();
+            foreach ($DocList as $elem){
+                $new_arr = array_merge($new_arr, self::findsimilartiyForDoc((int)$elem, $arr));
+                $arr = array_merge($arr, $new_arr);
+                //self::findSimilartiy($elem->document_title, false);
+            }
+
+            docsimilarity::insert($new_arr);
+
+            return Redirect::to("http://127.0.0.1:8000/seach_engine/");
+
+        });
+        }catch(\Exception $exc){
+            var_dump('hey');
+            dd($exc->getMessage());
+        }
+    }
+
+    function getdocsimilaritiesData(){
+        $Data = DB::table('docsimilarities')
+            ->select('doc_left_id', 'doc_id_right')
+            ->get();
+
+        $arr = array();
+        foreach ($Data as $elem){
+            array_push($arr, ['doc_left_id' => $elem->doc_left_id, 'doc_id_right' => $elem->doc_id_right]);
+        }
+
+        return $arr;
     }
 }
 

@@ -5,7 +5,7 @@
 <?php
 if(isset($Data['Content'])){
     $Data = $Data['Content']['Data'];
-    $main_doc = $Data[0];
+    $main_doc = $Data[0][1];
     $otherSimilarDoc = $Data[1];
     //dd($otherSimilarDoc);
 }
