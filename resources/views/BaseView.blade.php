@@ -103,6 +103,7 @@ desired effect
                 <li><a href="/FileManager/resetIndex/"><i class="fa fa-circle-o text-yellow"></i> <span>Reset Documents</span></a></li>
                 <li><a href="/similarity/browse/"php><i class="fa fa-circle-o text-aqua"></i> <span>Find Similarity</span></a></li>
                 <li><a href="/similarity/browseexist/"php><i class="fa fa-circle-o text-aqua"></i> <span>Existed Similarity</span></a></li>
+                <li><a href="/similarity/BrowseBackUp/"php><i class="fa fa-circle-o text-aqua"></i> <span>Similarity BackUp</span></a></li>
                 <form method="post" action="{{route('uploadeFile')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">

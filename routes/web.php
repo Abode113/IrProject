@@ -52,6 +52,10 @@ Route::get('/similarity/browse', 'similarityController@browse')->name('browseDoc
 Route::get('/similarity/browseexist', 'similarityController@browseexist')->name('browseexist');
 Route::post('/similarity/BackUp', 'similarityController@BackUpSimilarity')->name('BackUpSimilarity');
 Route::post('/similarity/delete', 'similarityController@deleteSimilarity')->name('deleteSimilarity');
+Route::get('/similarity/BrowseBackUp', 'similarityController@BrowseBackUp')->name('BrowseBackUp');
+Route::post('/similarity/deleteBackUp/{backup_id}', 'similarityController@deleteBackUp')->name('deleteSimilarityBackUp');
+Route::post('/similarity/deleteAllSimilarityNow/', 'similarityController@deleteAllSimilarityNow')->name('deleteAllSimilarityNow');
+Route::post('/similarity/ApplyBackUp/{backup_id}', 'similarityController@ApplyBackUp')->name('ApplySimilarityBackUp');
 
 
 

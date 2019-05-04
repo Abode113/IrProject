@@ -21,6 +21,16 @@
         <br/>
         <a href="/" class="btn btn-primary">Home
         </a>
+        <form method="post" action="{{route('BackUpSimilarity')}}" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-success">BackUp Similarity</button>
+        </form>
+        @if(!$add)
+            <form method="post" action="{{route('deleteAllSimilarityNow')}}" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-success">DeleteAll</button>
+            </form>
+        @endif
         @if($add)
             <form method="post" action="{{route('findsimilartiyalldoc')}}" enctype="multipart/form-data">
         @else
