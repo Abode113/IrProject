@@ -90,6 +90,8 @@ class Search extends Model {
 
         array_push($FinalData, $Query_stopWords_removed);
 
+        $FinalData = Indexing::Personalization($FinalData);
+
         return $FinalData;
     }
 

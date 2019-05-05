@@ -56,6 +56,7 @@ Route::get('/similarity/BrowseBackUp', 'similarityController@BrowseBackUp')->nam
 Route::post('/similarity/deleteBackUp/{backup_id}', 'similarityController@deleteBackUp')->name('deleteSimilarityBackUp');
 Route::post('/similarity/deleteAllSimilarityNow/', 'similarityController@deleteAllSimilarityNow')->name('deleteAllSimilarityNow');
 Route::post('/similarity/ApplyBackUp/{backup_id}', 'similarityController@ApplyBackUp')->name('ApplySimilarityBackUp');
+Route::post('/favorit/addtofavorit', 'favoritController@addtofavorit')->name('addtofavorit');
 
 
 

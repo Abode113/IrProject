@@ -910,6 +910,37 @@ class Indexing extends Model {
 
         return $normal;
     }
+
+    public static function Personalization($arr_result){
+
+        $data = DB::table('favorits')
+            ->get();
+
+        foreach ($arr_result[0] as $index => $res_elem){
+            foreach ($data as $fav_elem){
+                $value = self::checkRelevance($res_elem['document_id'], $fav_elem->doc_id);//relevance_val
+                $arr_result[0][$index]['relevance_val'] += $value;
+            }
+        }
+
+        return $arr_result;
+    }
+
+    public static function checkRelevance($res_elem, $fav_elem){
+	    if($res_elem == $fav_elem){
+            return 100;
+        }else{
+            $data = DB::table('docsimilarities')
+                ->whereIn('doc_left_id', [$res_elem, $fav_elem])
+                ->whereIn('doc_id_right', [$res_elem, $fav_elem])
+                ->get();
+            if(count($data) > 0){
+                return $data[0]->similarity_value * 100;
+            }else{
+                return 0;
+            }
+        }
+    }
 }
 
 

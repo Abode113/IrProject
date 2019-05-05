@@ -29,7 +29,7 @@
     ?>
 
     <section class="jumbotron text-center">
-        <div class="container" style="margin-top: -70px;">
+        <div class="container" style="margin-top: -60px;">
             <div class="row">
                 <div class="col-md-6">
                     <div class="bounce" style="width: 20%;margin-top: -34px;">
@@ -101,16 +101,28 @@
                         <?php
                         $number = 1;
                         ?>
+                        <form method="post" action="{{route('addtofavorit')}}" id="anchorForm">
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-success" style="text-align: right;margin: 15px 0px 10px 860px;">Add</button>
+
                         @if(isset($content))
                             @foreach($content as $elem)
                                 <div class="card">
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="home">
-                                            <a href="{{$elem['document_Link']}}"><legend>{{$number}} - {{$elem['document_title']}}</legend></a>
-                                            <?php
-                                            $number++;
-                                            ?>
-                                            <p>relevance value = {{$elem['relevance_val']}}</p> <br>
+                                            <div class="row">
+                                                <div class="col-md-11">
+                                                    <a href="{{$elem['document_Link']}}"><legend>{{$number}} - {{$elem['document_title']}}</legend></a>
+                                                    <?php
+                                                    $number++;
+                                                    ?>
+                                                    <p>relevance value = {{$elem['relevance_val']}}</p>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input type="checkbox" name="DocList[]" value="{{$elem['document_id']}}"></input>
+                                                </div>
+                                            </div>
+                                            <br>
                                             <?php
                                             $indexes = array_keys($elem['token']);
                                             ?>
@@ -128,6 +140,7 @@
                                 </div>
                             @endforeach
                         @endif
+                            </form>
                     </div>
                 </div>
             </div>
