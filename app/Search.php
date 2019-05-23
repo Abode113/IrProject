@@ -92,6 +92,14 @@ class Search extends Model {
 
         $FinalData = Indexing::Personalization($FinalData);
 
+        //dd($FinalData);
+        usort($FinalData[0], function($a, $b) { // anonymous function
+            if ($a['relevance_val'] == $b['relevance_val']) {
+                return 0;
+            }
+            return ($a['relevance_val'] > $b['relevance_val']) ? -1 : 1;
+        });
+
         return $FinalData;
     }
 

@@ -318,8 +318,30 @@ class Indexing extends Model {
             return ($a['relevance_val'] > $b['relevance_val']) ? -1 : 1;
         });
 
-        $relevence_docs = array_slice($relevence_docs,0, 30);
+
+        //$relevence_docs = array_slice($relevence_docs,0, 30);
+
+        //-------------------------
+        $releavnt = '61 155 156 242 269 315 339 358';
+        $releavnt_arr = explode(' ', $releavnt);
+        $_count = 0;
+        foreach ($relevence_docs as $elem){
+            $str = substr($elem['document_title'], 0, -4);
+            foreach ($releavnt_arr as $needed){
+                if((int)$str == (int)$needed){
+                    $_count++;
+                }
+            }
+        }
+
+//        var_dump('precision = ' . bcdiv($_count, count($relevence_docs), 10));
+//        var_dump('recall = ' . bcdiv($_count, count($releavnt_arr), 10));
+        //var_dump(count($relevence_docs));
+        //-------------------------
+
         $result = [$relevence_docs, $mostPropWords];
+        //dd($result);
+
 		return $result;
 	}
 
@@ -916,25 +938,39 @@ class Indexing extends Model {
         $data = DB::table('favorits')
             ->get();
 
+        $tes = array();
+
+        //dd($arr_result[0]);
         foreach ($arr_result[0] as $index => $res_elem){
             foreach ($data as $fav_elem){
                 $value = self::checkRelevance($res_elem['document_id'], $fav_elem->doc_id);//relevance_val
                 $arr_result[0][$index]['relevance_val'] += $value;
+                $ste = substr($res_elem['document_title'], 0, -4);
+                if(isset($tes[(int)$ste])){
+                    $tes[(int)$ste] += $value;
+                }else{
+                    $tes[(int)$ste] = $value;
+                }
             }
         }
+        //dd($tes);
 
         return $arr_result;
     }
 
     public static function checkRelevance($res_elem, $fav_elem){
+
 	    if($res_elem == $fav_elem){
-            return 100;
+            //var_dump($res_elem . ' = ' . $fav_elem . ' ==== ' . 100);
+            return 1000;
         }else{
             $data = DB::table('docsimilarities')
                 ->whereIn('doc_left_id', [$res_elem, $fav_elem])
                 ->whereIn('doc_id_right', [$res_elem, $fav_elem])
                 ->get();
             if(count($data) > 0){
+                //var_dump($res_elem . ' = ' . $fav_elem . ' ==== ' . $data[0]->similarity_value * 250);
+                //dd($data[0]->similarity_value * 100);
                 return $data[0]->similarity_value * 100;
             }else{
                 return 0;

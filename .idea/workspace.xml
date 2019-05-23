@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd27c90d-c7a2-4bfc-a3ea-22b5ef9f3324" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/favoritController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/favorit.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Indexing.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Indexing.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Search.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/BaseView.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BaseView.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/result.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/result.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +19,7 @@
     <session id="-568099748">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
@@ -33,6 +28,7 @@
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.15" value="2" />
           <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.3" value="3" />
@@ -41,10 +37,12 @@
           <entry key="project.open.time.33" value="2" />
           <entry key="project.open.time.36" value="2" />
           <entry key="project.open.time.38" value="1" />
+          <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.42" value="1" />
+          <entry key="project.open.time.43" value="1" />
           <entry key="project.open.time.46" value="1" />
           <entry key="project.open.time.53" value="1" />
-          <entry key="project.opened" value="24" />
+          <entry key="project.opened" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -54,7 +52,7 @@
           <entry key="html" value="12" />
           <entry key="js" value="2" />
           <entry key="json" value="2" />
-          <entry key="php" value="245" />
+          <entry key="php" value="248" />
           <entry key="sql" value="2" />
           <entry key="txt" value="2" />
         </counts>
@@ -67,7 +65,7 @@
           <entry key="HTML" value="12" />
           <entry key="JSON" value="2" />
           <entry key="JavaScript" value="2" />
-          <entry key="PHP" value="174" />
+          <entry key="PHP" value="177" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="SQL" value="2" />
         </counts>
@@ -78,9 +76,9 @@
           <entry key="env" value="4" />
           <entry key="html" value="6" />
           <entry key="js" value="1" />
-          <entry key="php" value="26475" />
+          <entry key="php" value="27086" />
           <entry key="sql" value="1" />
-          <entry key="txt" value="1541" />
+          <entry key="txt" value="1570" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -90,8 +88,8 @@
           <entry key="CSS" value="101" />
           <entry key="HTML" value="6" />
           <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="23260" />
-          <entry key="PLAIN_TEXT" value="1541" />
+          <entry key="PHP" value="23871" />
+          <entry key="PLAIN_TEXT" value="1570" />
           <entry key="SQL" value="2" />
         </counts>
       </usages-collector>
@@ -105,31 +103,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="34" column="33" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/favoritController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-              <folding>
-                <element signature="e#40#68#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/searchController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+            <state relative-caret-position="315">
+              <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
               </folding>
@@ -140,8 +117,41 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Search.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="92" column="40" selection-start-line="92" selection-start-column="40" selection-end-line="92" selection-end-column="40" />
+            <state relative-caret-position="126">
+              <caret line="84" column="38" lean-forward="true" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
+              <folding>
+                <element signature="e#23#62#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/similarityController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="87" column="72" lean-forward="true" selection-start-line="87" selection-start-column="72" selection-end-line="87" selection-end-column="72" />
+              <folding>
+                <element signature="e#40#68#0#PHP" expanded="true" />
+                <element signature="e#316#851#0#PHP" />
+                <element signature="e#857#1401#0#PHP" />
+                <element signature="e#1407#1864#0#PHP" />
+                <element signature="e#4972#6380#0#PHP" />
+                <element signature="e#6386#6654#0#PHP" />
+                <element signature="e#6660#6935#0#PHP" />
+                <element signature="e#6941#7370#0#PHP" />
+                <element signature="e#7376#8839#0#PHP" />
+                <element signature="e#8845#9447#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/docsimilarity.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="95" column="27" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="27" />
               <folding>
                 <element signature="e#23#62#0#PHP" expanded="true" />
               </folding>
@@ -152,8 +162,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Indexing.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="924" column="8" selection-start-line="924" selection-start-column="8" selection-end-line="924" selection-end-column="8" />
+            <state relative-caret-position="244">
+              <caret line="318" column="11" lean-forward="true" selection-start-line="318" selection-start-column="11" selection-end-line="318" selection-end-column="11" />
               <folding>
                 <element signature="e#12544#13533#0#PHP" />
                 <element signature="e#13539#15384#0#PHP" />
@@ -166,7 +176,6 @@
                 <element signature="e#30645#30866#0#PHP" />
                 <element signature="e#30872#31253#0#PHP" />
                 <element signature="e#31259#31471#0#PHP" />
-                <element signature="e#31477#31902#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -174,15 +183,13 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-145" />
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/favorit.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
+            <state relative-caret-position="231">
               <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
               <folding>
                 <element signature="e#23#62#0#PHP" expanded="true" />
@@ -194,12 +201,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/result.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-63">
-              <caret line="33" column="38" lean-forward="true" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-              <folding>
-                <element signature="e#1299#1325#0#HTML" expanded="true" />
-                <element signature="e#4910#4964#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="693">
+              <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -234,13 +237,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>wherei</find>
-      <find>doc_left_id</find>
-      <find>DB::table</find>
-      <find>-&gt;toArray</find>
-      <find>-&gt;gr</find>
-      <find>distinct</find>
-      <find>deleteSimilarity</find>
       <find>-&gt;inser</find>
       <find>browse</find>
       <find>BackUp</find>
@@ -264,6 +260,13 @@
       <find>&lt;span class=&quot;letter&quot;&gt;A&lt;/span&gt;</find>
       <find>redir</find>
       <find>add</find>
+      <find>&gt; 30</find>
+      <find>30</find>
+      <find>square</find>
+      <find>Personalization</find>
+      <find>$tf_idf</find>
+      <find>checkRelevance</find>
+      <find>$expanded_query</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -327,8 +330,8 @@
         <option value="$PROJECT_DIR$/app/favorit.php" />
         <option value="$PROJECT_DIR$/resources/views/result.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/favoritController.php" />
-        <option value="$PROJECT_DIR$/app/Search.php" />
         <option value="$PROJECT_DIR$/app/Indexing.php" />
+        <option value="$PROJECT_DIR$/app/Search.php" />
       </list>
     </option>
   </component>
@@ -439,8 +442,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="200" />
-    <option name="y" value="25" />
+    <option name="x" value="177" />
+    <option name="y" value="122" />
     <option name="width" value="1540" />
     <option name="height" value="940" />
   </component>
@@ -450,7 +453,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -501,6 +503,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -512,15 +515,15 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Angular\IrProj\app" />
-      <recent name="D:\Angular\IrProj\app\Http" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Angular\IrProj" />
       <recent name="D:\Angular\IrProj\resources\views" />
       <recent name="D:\Angular\IrProj\app" />
       <recent name="D:\Angular\IrProj\app\Http\Controllers" />
+      <recent name="D:\Angular\IrProj\app\Http" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Angular\IrProj\app" />
       <recent name="D:\Angular\IrProj\app\Http" />
     </key>
   </component>
@@ -569,7 +572,11 @@
       <workItem from="1556558086975" duration="15502000" />
       <workItem from="1556702026614" duration="40074000" />
       <workItem from="1556910956669" duration="29482000" />
-      <workItem from="1557073143495" duration="3997000" />
+      <workItem from="1557073143495" duration="5028000" />
+      <workItem from="1557395058230" duration="242000" />
+      <workItem from="1557932967363" duration="10000" />
+      <workItem from="1558137868002" duration="16000" />
+      <workItem from="1558195032338" duration="18926000" />
     </task>
     <task id="LOCAL-00001" summary="initail commit">
       <created>1552073198181</created>
@@ -767,11 +774,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556995473677</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="finishing personalization :)">
+      <created>1557099550616</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1557099550616</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="333487000" />
+    <option name="totallyTimeSpent" value="353696000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -779,7 +793,7 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.21342282" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.22550336" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="0" weight="0.3297587" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.28820375" />
@@ -830,7 +844,8 @@
     <MESSAGE value="implementation of find similarity of selected document and all other document" />
     <MESSAGE value="add similarity to table of 'docsimilarities' and delete from it so we can use it in personalization" />
     <MESSAGE value="backup on similarity database and delete one or all of it and ability to apply any of backed up" />
-    <option name="LAST_COMMIT_MESSAGE" value="backup on similarity database and delete one or all of it and ability to apply any of backed up" />
+    <MESSAGE value="finishing personalization :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="finishing personalization :)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/documents/161_supersonic_flow_past_a_family_of_blunt_symmetric_bodies.txt" />
@@ -1006,21 +1021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="12" column="39" lean-forward="true" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-          <folding>
-            <element signature="e#428#458#0#PHP" />
-            <element signature="e#505#644#0#PHP" />
-            <element signature="e#505#767#0#PHP" />
-            <element signature="e#505#970#0#PHP" />
-            <element signature="e#1058#1561#0#PHP" />
-            <element signature="e#1124#1288#0#PHP" />
-            <element signature="e#1124#1436#0#PHP" />
-            <element signature="e#1124#1495#0#PHP" />
-            <element signature="e#1567#2820#0#PHP" />
-            <element signature="e#1644#1703#0#PHP" />
-            <element signature="e#1733#2791#0#PHP" />
-            <element signature="e#2227#2791#0#PHP" />
-            <element signature="e#2446#2501#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1042,16 +1042,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/docsimilarity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1111,48 +1101,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/similarityList.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1344">
-          <caret line="64" column="73" selection-start-line="64" selection-start-column="73" selection-end-line="64" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
+        <state relative-caret-position="525">
           <caret line="34" column="33" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-145" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/similarityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3423">
-          <caret line="163" column="12" lean-forward="true" selection-start-line="163" selection-start-column="12" selection-end-line="163" selection-end-column="71" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/favorit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/favoritController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="273">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
@@ -1160,14 +1118,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/favorit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+          <folding>
+            <element signature="e#23#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/result.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-63">
-          <caret line="33" column="38" lean-forward="true" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-          <folding>
-            <element signature="e#1299#1325#0#HTML" expanded="true" />
-            <element signature="e#4910#4964#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="693">
+          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -1178,20 +1145,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/similarityList.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1344">
+          <caret line="64" column="73" selection-start-line="64" selection-start-column="73" selection-end-line="64" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/searchController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+        <state relative-caret-position="315">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/docsimilarity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="95" column="27" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="27" />
+          <folding>
+            <element signature="e#23#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/similarityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="87" column="72" lean-forward="true" selection-start-line="87" selection-start-column="72" selection-end-line="87" selection-end-column="72" />
+          <folding>
+            <element signature="e#40#68#0#PHP" expanded="true" />
+            <element signature="e#316#851#0#PHP" />
+            <element signature="e#857#1401#0#PHP" />
+            <element signature="e#1407#1864#0#PHP" />
+            <element signature="e#4972#6380#0#PHP" />
+            <element signature="e#6386#6654#0#PHP" />
+            <element signature="e#6660#6935#0#PHP" />
+            <element signature="e#6941#7370#0#PHP" />
+            <element signature="e#7376#8839#0#PHP" />
+            <element signature="e#8845#9447#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Search.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="92" column="40" selection-start-line="92" selection-start-column="40" selection-end-line="92" selection-end-column="40" />
+        <state relative-caret-position="126">
+          <caret line="84" column="38" lean-forward="true" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
           <folding>
             <element signature="e#23#62#0#PHP" expanded="true" />
           </folding>
@@ -1200,8 +1203,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Indexing.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="924" column="8" selection-start-line="924" selection-start-column="8" selection-end-line="924" selection-end-column="8" />
+        <state relative-caret-position="244">
+          <caret line="318" column="11" lean-forward="true" selection-start-line="318" selection-start-column="11" selection-end-line="318" selection-end-column="11" />
           <folding>
             <element signature="e#12544#13533#0#PHP" />
             <element signature="e#13539#15384#0#PHP" />
@@ -1214,7 +1217,6 @@
             <element signature="e#30645#30866#0#PHP" />
             <element signature="e#30872#31253#0#PHP" />
             <element signature="e#31259#31471#0#PHP" />
-            <element signature="e#31477#31902#0#PHP" />
           </folding>
         </state>
       </provider>
